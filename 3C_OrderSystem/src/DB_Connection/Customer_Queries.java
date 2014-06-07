@@ -2,29 +2,21 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package Msg_Displays;
+package DB_Connection;
 
 /**
  *
  * @author Bella Belova
  */
-
-public class Menu_Item_List {
-    
-    private static final String PRODUCT_TABLE_NAME = "3C_PRODUCT";  
-    private static java.sql.Connection sqlConn;
-    public static class TableException extends Exception{
+public class Customer_Queries {
+        public static class TableException extends Exception{
         TableException(String s){
             super(s);
         }
     }
 
-    public Menu_Item_List()
-    {
-        sqlConn = Connect.MYSQL.getMSQLConn();
-    }
-    
-    public static java.util.ArrayList Item_List()
+    // Search table data
+    public static java.util.ArrayList searchbyLASTNAME(String LAST_NAME)
             throws TableException{
         int id; String fn; String ln;
         java.sql.Statement stmt;
@@ -33,8 +25,8 @@ public class Menu_Item_List {
         java.sql.ResultSet rs = null;
         
         try{
-          String createString = "select * from " + PRODUCT_TABLE_NAME ;                
-          stmt = sqlConn.createStatement();
+          String createString = "select * from " + Create_Tables.Customer_Table.CUSTOMER_TABLE_NAME + " where LastName like '%" + LAST_NAME + "%';" ;                
+          stmt = Create_Tables.Customer_Table.sqlConn.createStatement();
           rs = stmt.executeQuery(createString);  
           results = new java.util.ArrayList();
             while (rs.next() == true)
@@ -42,11 +34,8 @@ public class Menu_Item_List {
                         rs.getString("LastName"), rs.getInt("BillAddress"), rs.getInt("ShipAddress"), 
                         rs.getString("EmailAddress"), rs.getString("PhoneNumber")));  
         }catch (java.sql.SQLException e){
-            throw new TableException("Unable to Display Items." + "\nDetail: " + e);
+            throw new TableException("Unable to search Customer Table." + "\nDetail: " + e);
         }
         return results;
     }
-
-
-    
 }

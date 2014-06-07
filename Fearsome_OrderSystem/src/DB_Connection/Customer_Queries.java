@@ -6,7 +6,7 @@ package DB_Connection;
 
 /**
  *
- * @author Gregory
+ * @author Bella Belova
  */
 public class Customer_Queries {
         public static class TableException extends Exception{
@@ -15,8 +15,8 @@ public class Customer_Queries {
         }
     }
 
-    // Search table data
-    public static java.util.ArrayList searchbyLASTNAME(String LAST_NAME)
+    // Query to search for a Customer by their LAST_NAME
+    public static java.util.ArrayList searchCustbyLastName(String lName)
             throws TableException{
         int id; String fn; String ln;
         java.sql.Statement stmt;
@@ -25,16 +25,16 @@ public class Customer_Queries {
         java.sql.ResultSet rs = null;
         
         try{
-          String createString = "select * from " + Create_Tables.Customer_Table.CUSTOMER_TABLE_NAME + " where LastName like '%" + LAST_NAME + "%';" ;                
+          String createString = "select * from " + Create_Tables.Customer_Table.CUSTOMER_TABLE_NAME + " where LAST_NAME like '%" + lName + "%';" ;                
           stmt = Create_Tables.Customer_Table.sqlConn.createStatement();
           rs = stmt.executeQuery(createString);  
           results = new java.util.ArrayList();
             while (rs.next() == true)
-                results.add(new OrderSystem_Classes.Customer (rs.getInt("CustomerID"), rs.getString("FirstName"), 
-                        rs.getString("LastName"), rs.getInt("BillAddress"), rs.getInt("ShipAddress"), 
-                        rs.getString("EmailAddress"), rs.getString("PhoneNumber"), rs.getInt("OrderIDs")));  
+                results.add(new OrderSystem_Classes.Customer (rs.getInt("CUSTOMER_ID"), rs.getString("FIRST_NAME"), 
+                        rs.getString("LAST_NAME"), rs.getInt("BILL_ADDRESS"), rs.getInt("SHIP_ADDRESS"), 
+                        rs.getString("EMAIL"), rs.getString("PHONE")));  
         }catch (java.sql.SQLException e){
-            throw new TableException("Unable to search Customer Table." + "\nDetaill: " + e);
+            throw new TableException("Unable to search Customer Table." + "\nDetail: " + e);
         }
         return results;
     }

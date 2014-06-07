@@ -8,21 +8,19 @@ package OrderSystem_Classes;
  *
  * @author Bella Belova
  */
-public class Stock_Items {
+public class Items {
     
+    private int OrderItemID;
+    private int OrderID;
     private int ProductID;
-    private String ProductName;
-    private int StockQuantity;
-
+    private int Quantity;
     
-    
-    // Constructor
-    
-    public Stock_Items (int ProdID, String ProdName, int StockQty) {
+    public Items (int OrdItemID, int OrdID, int ProdID, int Qty) {
         
+        OrderItemID = OrdItemID;
+        OrderID = OrdID;
         ProductID = ProdID;
-        ProductName = ProdName;
-        StockQuantity = StockQty;
+        Quantity = Qty;
     }
     
 }

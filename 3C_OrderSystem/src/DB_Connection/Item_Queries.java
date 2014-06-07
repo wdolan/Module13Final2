@@ -4,19 +4,19 @@
  */
 package DB_Connection;
 
+
 /**
  *
  * @author Bella Belova
  */
-public class Stock_Items_Queries {
-    
+public class Item_Queries {
         public static class TableException extends Exception{
         TableException(String s){
             super(s);
         }
-    }
-    // Query to search Stock Items Database for current Stock Quantity by PROD_ID
-    public static java.util.ArrayList searchforStockQTY(int prodID)
+     }    
+    // Search table data
+    public static java.util.ArrayList searchbyItemID(int Item_ID)
             throws TableException{
         int id; String fn; String ln;
         java.sql.Statement stmt;
@@ -25,18 +25,18 @@ public class Stock_Items_Queries {
         java.sql.ResultSet rs = null;
         
         try{
-          String createString = "select * from " + Create_Tables.Stock_Items_Table.STOCK_ITEMS_TABLE_NAME + " where PROD_ID " + prodID + ";" ;                
-          stmt = Create_Tables.Stock_Items_Table.mysqlConn.createStatement();
+          String createString = "select * from " + Create_Tables.Items_Table.ITEMS_TABLE_NAME + " where Order_Item_ID like " + Item_ID + ";" ;                
+          stmt = Create_Tables.Items_Table.sqlConn.createStatement();
           rs = stmt.executeQuery(createString);  
           results = new java.util.ArrayList();
             while (rs.next() == true)
-                results.add(new OrderSystem_Classes.Stock_Items (rs.getInt("PROD_ID"), rs.getString("PROD_NAME"), 
-                        rs.getInt("STOCK_QTY")));  
+                results.add(new OrderSystem_Classes.Items (rs.getInt("Order_Item_ID"), rs.getInt("OrderID"), 
+                        rs.getInt("ProductID"), rs.getInt("Quantity")));  
         }catch (java.sql.SQLException e){
-            throw new TableException("Unable to search Quantity in Stock_Items Table." + "\nDetail: " + e);
+            throw new TableException("Unable to search Item Database." + "\nDetail: " + e);
         }
         return results;
-    }
-
     
+        }
+      
 }

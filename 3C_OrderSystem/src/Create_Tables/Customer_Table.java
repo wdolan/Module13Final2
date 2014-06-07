@@ -11,7 +11,7 @@ import  Connect.*;
 
 /**
  *
- * @author Bella Belova
+ * @author Gregory
  */
 public class Customer_Table {
     
@@ -48,17 +48,18 @@ public class Customer_Table {
             //Create the CUSTOMER Table
             createString =
             "create table " + CUSTOMER_TABLE_NAME + " " + 
-            "(CUSTOMER_ID integer identity (1,1) NOT NULL, " +
-            "FIRST_NAME varchar(50) NOT NULL, " +
-            "LAST_NAME varchar(50) NOT NULL, " +
-            "BILL_ADDRESS integer NOT NULL, " + 
-            "SHIP_ADDRESS integer NOT NULL, " + 
-            "EMAIL varchar(50) NOT NULL, " + 
-            "PHONE varchar(13) NULL, " + 
-            "PRIMARY KEY (CUSTOMER_ID))";
+            "(CustomerID integer identity (1,1) NOT NULL, " +
+            "FirstName varchar(50) NOT NULL, " +
+            "LastName varchar(50) NOT NULL, " +
+            "BillAddress integer NOT NULL, " + 
+            "ShipAddress integer NOT NULL, " + 
+            "EmailAddress varchar(50) NOT NULL, " + 
+            "PhoneNumber varchar(13) NULL, " + 
+            "PRIMARY KEY (CustomerID))";
 /*                    
-            "FOREIGN KEY (BILL_ADDRESS) REFERENCES 3C_ADDRESS (ADDRESS_ID), " + 
-            "FOREIGN KEY (SHIP_ADDRESS) REFERENCES 3C_ADDRESS (ADDRESS_ID), " + 
+            "FOREIGN KEY (BillAddress) REFERENCES FEARSOME_ADDRESS (AddressID), " + 
+            "FOREIGN KEY (ShipAddress) REFERENCES FEARSOME_ADDRESS (AddressID), " + 
+            "FOREIGN KEY (OrderIDs) REFERENCES FEARSOME_ORDERS (OrderID)) ";
             * 
             */ 
             stmt = sqlConn.createStatement();
@@ -89,8 +90,8 @@ public class Customer_Table {
         try{
 
           String createString = "SET IDENTITY_INSERT " + CUSTOMER_TABLE_NAME + " on insert into " + CUSTOMER_TABLE_NAME + 
-                  " (CUSTOMER_ID, FIRST_NAME, LAST_NAME, BILL_ADDRESS, SHIP_ADDRESS, "
-                  + "EMAIL, PHONE) VALUES(" +
+                  " (CustomerID, FirstName, LastName, BillAddress, ShipAddress, "
+                  + "EmailAddress, PhoneNumber) VALUES(" +
                     Cust_ID + ", '" + FName + "', '" + LName + "', " + BillAddr + ", " + 
                     ShipAddr + ", '" + EMail + "', '" + PhNbr + "');" ;
           stmt = sqlConn.createStatement();
@@ -114,9 +115,9 @@ public class Customer_Table {
           rs = stmt.executeQuery(createString);  
           results = new java.util.ArrayList();
             while (rs.next() == true)
-                results.add(new OrderSystem_Classes.Customer (rs.getInt("CUSTOMER_ID"), rs.getString("FIRST_NAME"), 
-                        rs.getString("LAST_NAME"), rs.getInt("BILL_ADDRESS"), rs.getInt("SHIP_ADDRESS"), 
-                        rs.getString("EMAIL"), rs.getString("PHONE")));  
+                results.add(new OrderSystem_Classes.Customer (rs.getInt("CustomerID"), rs.getString("FirstName"), 
+                        rs.getString("LastName"), rs.getInt("BillAddress"), rs.getInt("ShipAddress"), 
+                        rs.getString("EmailAddress"), rs.getString("PhoneNumber")));  
         }catch (java.sql.SQLException e){
             throw new TableException("Unable to search Customer Table." + "\nDetail: " + e);
         }

@@ -16,8 +16,8 @@ public class Address_Queries {
         }
     }
     
-    // Search table data
-    public static java.util.ArrayList searchbyCustomerID(int Customer_ID)
+    // Query to search for addresses by CUSTOMER_ID
+    public static java.util.ArrayList searchAddbyCustomerID(int custID)
             throws TableException{
         int id; String fn; String ln;
         java.sql.Statement stmt;
@@ -26,16 +26,16 @@ public class Address_Queries {
         java.sql.ResultSet rs = null;
         
         try{
-          String createString = "select * from " + Create_Tables.Address_Table.ADDRESS_TABLE_NAME + " where CustomerID like " + Customer_ID + ";" ;                
+          String createString = "select * from " + Create_Tables.Address_Table.ADDRESS_TABLE_NAME + " where CUSTOMER_ID like " + custID + ";" ;                
           stmt = Create_Tables.Address_Table.sqlConn.createStatement();
           rs = stmt.executeQuery(createString);  
           results = new java.util.ArrayList();
             while (rs.next() == true)
-                results.add(new OrderSystem_Classes.Address (rs.getInt("AddressID"), rs.getInt("CustomerID"), 
-                        rs.getString("AddressType"), rs.getString("Address1"), rs.getString("Address2"), 
-                        rs.getString("City"), rs.getString("State"), rs.getInt("Zip")));  
+                results.add(new OrderSystem_Classes.Address (rs.getInt("ADDRESS_ID"), rs.getInt("CUSTOMER_ID"), 
+                        rs.getString("ADDRESS_TYPE"), rs.getString("ADDRESS1"), rs.getString("ADDRESS2"), 
+                        rs.getString("CITY"), rs.getString("STATE"), rs.getInt("ZIP")));  
         }catch (java.sql.SQLException e){
-            throw new TableException("Unable to search Address Table." + "\nDetaill: " + e);
+            throw new TableException("Unable to search Address Table." + "\nDetail: " + e);
         }
         return results;
     }
