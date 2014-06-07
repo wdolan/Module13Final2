@@ -4,23 +4,22 @@
  */
 package DB_Connection;
 
-import Create_Tables.Address_Table;
-import Create_Tables.Items_Table;
-import Create_Tables.Orders_Table;
-import java.io.IOException;
-import Msg_Displays.*;
-
 /**
  *
- * @author Bella Belova
+ * @author Amy Roberts
  */
-public class main_class {
-
-    public static void main(String[] argv) throws IOException, Address_Table.TableException, Orders_Table.TableException, Items_Table.TableException
-    {
-        MenuShow main_menu;
-        main_menu = new MenuShow();
-        main_menu.MenuRun();
-        
-    }
+public class main_class 
+{
+	public static void main(String[] args)
+	{
+		//initialize database connections
+		//initialize tables
+		//load data to tables
+		System.out.println("Welcome to the store, James!\n");
+		Msg_Displays.Menu.main_menu();
+		
+		//take input
+		//switch on input
+		
+	}
 }
