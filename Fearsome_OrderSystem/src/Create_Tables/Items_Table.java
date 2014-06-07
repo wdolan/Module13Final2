@@ -13,7 +13,7 @@ import DB_Connection.Item_Queries;
  */
 public class Items_Table {
     
-    public static final String ITEMS_TABLE_NAME = "FEFO_ITEMS";   
+    public static final String ITEMS_TABLE_NAME = "3C_ITEMS";   
     public static java.sql.Connection sqlConn;
     SQL sql_access;
     public static class TableException extends Exception{
@@ -47,34 +47,35 @@ public class Items_Table {
             //Create the Items_Table Table
             createString =
             "create table " + ITEMS_TABLE_NAME + " " + 
-            "(OrderItemID integer identity (1,1) NOT NULL, " +
-            "OrderID integer NOT NULL, " +
-            "ProductID integer NOT NULL, " +
-            "Quantaty integer NOT NULL, " +
-            "PRIMARY KEY (OrderItemID), " +
-            "FOREIGN KEY (OrderID) REFERENCES FEFO_ORDERS (OrderID)) ";
+            "(ORDER_ITEM_ID integer identity (1,1) NOT NULL, " +
+            "ORDER_ID integer NOT NULL, " +
+            "PRODUCT_ID integer NOT NULL, " +
+            "QUANTITY integer NOT NULL, " +
+            "PROD_PRICE decimal(12,2) NOT NULL, " +
+            "PRIMARY KEY (ORDER_ITEM_ID), " +
+            "FOREIGN KEY (ORDER_ID) REFERENCES 3C_ORDERS (ORDER_ID)) ";
             stmt = sqlConn.createStatement();
             stmt.executeUpdate(createString);
         } catch (java.sql.SQLException e) {
-            throw new TableException("Unable to create " + ITEMS_TABLE_NAME + "\nDetaill: " + e);
+            throw new TableException("Unable to create " + ITEMS_TABLE_NAME + "\nDetail: " + e);
         }        
     }
 
     
         //Insert Items_Table data
-    public void createItems(int Ord_Item_ID, int Ord_ID, int Prod_ID, int QTY) 
+    public void createItems(int Ord_Item_ID, int Ord_ID, int Prod_ID, int QTY, float Prod_Price) 
         throws TableException{
     
     java.sql.Statement stmt;
         try{
 
           String createString = "SET IDENTITY_INSERT " + ITEMS_TABLE_NAME + " on insert into " + ITEMS_TABLE_NAME + 
-                  " (OrderItemID, OrderID, ProductID, Quantaty ) VALUES(" + Ord_Item_ID + ", "
-                   + Ord_ID + ", " + Prod_ID + ", " + QTY  + " );" ;
+                  " (ORDER_ITEM_ID, ORDER_ID, PRODUCT_ID, QUANTITY, PROD_PRICE ) VALUES(" + Ord_Item_ID + ", "
+                   + Ord_ID + ", " + Prod_ID + ", " + QTY  + "," + Prod_Price + " );" ;
           stmt = sqlConn.createStatement();
           stmt.executeUpdate(createString);  
         } catch (java.sql.SQLException e) {
-            throw new TableException("Unable to create a new Address in the Database." + "\nDetaill: " + e);
+            throw new TableException("Unable to create a new Address in the Database." + "\nDetail: " + e);
         }
     }
     
@@ -92,10 +93,10 @@ public class Items_Table {
           rs = stmt.executeQuery(createString);  
           results = new java.util.ArrayList();
             while (rs.next() == true)
-                results.add(new OrderSystem_Classes.Items (rs.getInt("Order_Item_ID"), rs.getInt("OrderID"), 
-                        rs.getInt("ProductID"), rs.getInt("Quantaty")));  
+                results.add(new OrderSystem_Classes.OrderItems (rs.getInt("ORDER_ITEM_ID"), rs.getInt("ORDER_ID"), 
+                        rs.getInt("PRODUCT_ID"), rs.getInt("QUANTITY"), rs.getFloat("PROD_PRICE")));  
         }catch (java.sql.SQLException e){
-            throw new TableException("Unable to search Item Database." + "\nDetaill: " + e);
+            throw new TableException("Unable to search Item Database." + "\nDetail: " + e);
         }
         return results;
     

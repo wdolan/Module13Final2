@@ -45,8 +45,8 @@ public class DataLoad {
 // Customer Table
         try {
             customer_data.reset();
-            customer_data.createCustomer(10005, "John", "Smith", 1, 2, "bb248141@yahoo.com", "(718)698-9852", 77777 );
-            customer_data.createCustomer(10012, "Adam", "Sandler", 1, 2, "sy896325@hotmail.com", "(212)569-7896", 77712 );
+            customer_data.createCustomer(10005, "John", "Smith", 1, 2, "bb248141@yahoo.com", "(718)698-9852" );
+            customer_data.createCustomer(10012, "Adam", "Sandler", 1, 2, "sy896325@hotmail.com", "(212)569-7896" );
             java.util.ArrayList results  = customer_data.getAllCustomers();
             max_index = results.size();
             System.out.println("Customer Table:\n");
@@ -94,8 +94,8 @@ public class DataLoad {
         // Item Table
         try {
             item_order_data.reset();
-            item_order_data.createItems(12, 77777, 7896, 2);
-            item_order_data.createItems(78, 77712, 7589, 6);
+            item_order_data.createItems(12, 77777, 7896, 2, 12.99f);
+            item_order_data.createItems(78, 77712, 7589, 6, 10.99f);
             java.util.ArrayList results  = item_order_data.getAllItems();
             max_index = results.size();
             System.out.println("Items Table:\n");

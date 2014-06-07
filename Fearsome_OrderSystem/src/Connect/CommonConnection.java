@@ -6,7 +6,7 @@ package Connect;
 
 /**
  *
- * @author Gregory
+ * @author Bella Belova
  */
 public class CommonConnection {
 

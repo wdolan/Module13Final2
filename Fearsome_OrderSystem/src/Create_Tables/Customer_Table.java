@@ -11,11 +11,11 @@ import  Connect.*;
 
 /**
  *
- * @author Gregory
+ * @author Bella Belova
  */
 public class Customer_Table {
     
-    public static final String CUSTOMER_TABLE_NAME = "FEFO_CUSTOMERS";
+    public static final String CUSTOMER_TABLE_NAME = "3C_CUSTOMERS";
     public static java.sql.Connection sqlConn;
     SQL sql_access;
     public static class TableException extends Exception{
@@ -48,25 +48,23 @@ public class Customer_Table {
             //Create the CUSTOMER Table
             createString =
             "create table " + CUSTOMER_TABLE_NAME + " " + 
-            "(CustomerID integer identity (1,1) NOT NULL, " +
-            "FirstName varchar(50) NOT NULL, " +
-            "LastName varchar(50) NOT NULL, " +
-            "BillAddress integer NOT NULL, " + 
-            "ShipAddress integer NOT NULL, " + 
-            "EmailAddress varchar(50) NOT NULL, " + 
-            "PhoneNumber varchar(13) NULL, " + 
-            "OrderIDs integer NULL, " +
-            "PRIMARY KEY (CustomerID))";
+            "(CUSTOMER_ID integer identity (1,1) NOT NULL, " +
+            "FIRST_NAME varchar(50) NOT NULL, " +
+            "LAST_NAME varchar(50) NOT NULL, " +
+            "BILL_ADDRESS integer NOT NULL, " + 
+            "SHIP_ADDRESS integer NOT NULL, " + 
+            "EMAIL varchar(50) NOT NULL, " + 
+            "PHONE varchar(13) NULL, " + 
+            "PRIMARY KEY (CUSTOMER_ID))";
 /*                    
-            "FOREIGN KEY (BillAddress) REFERENCES FEARSOME_ADDRESS (AddressID), " + 
-            "FOREIGN KEY (ShipAddress) REFERENCES FEARSOME_ADDRESS (AddressID), " + 
-            "FOREIGN KEY (OrderIDs) REFERENCES FEARSOME_ORDERS (OrderID)) ";
+            "FOREIGN KEY (BILL_ADDRESS) REFERENCES 3C_ADDRESS (ADDRESS_ID), " + 
+            "FOREIGN KEY (SHIP_ADDRESS) REFERENCES 3C_ADDRESS (ADDRESS_ID), " + 
             * 
             */ 
             stmt = sqlConn.createStatement();
             stmt.executeUpdate(createString);
         } catch (java.sql.SQLException e) {
-            throw new TableException("Unable to create " + CUSTOMER_TABLE_NAME + "\nDetaill: " + e);
+            throw new TableException("Unable to create " + CUSTOMER_TABLE_NAME + "\nDetail: " + e);
         }        
     }
     
@@ -79,27 +77,26 @@ public class Customer_Table {
  * @param ShipAddress An integer that except "0" or "1" for checked or unchecked Shipping Address
  * @param EmailAddress Customer_Table EMail Address
  * @param PhoneNumber String field that will except parenthesis and numbers
- * @param OrderIDs Order Number
  * @throws TableException This exception represents a problem with the access and updating of the DB table.
  */
     
     //Insert Customer_Table data
     public void createCustomer(int Cust_ID, String FName, String LName, int BillAddr, 
-                                        int ShipAddr, String EMail, String PhNbr, int OrderNbr) 
+                                        int ShipAddr, String EMail, String PhNbr) 
         throws TableException{
     
     java.sql.Statement stmt;
         try{
 
           String createString = "SET IDENTITY_INSERT " + CUSTOMER_TABLE_NAME + " on insert into " + CUSTOMER_TABLE_NAME + 
-                  " (CustomerID, FirstName, LastName, BillAddress, ShipAddress, "
-                  + "EmailAddress, PhoneNumber, OrderIDs) VALUES(" +
+                  " (CUSTOMER_ID, FIRST_NAME, LAST_NAME, BILL_ADDRESS, SHIP_ADDRESS, "
+                  + "EMAIL, PHONE) VALUES(" +
                     Cust_ID + ", '" + FName + "', '" + LName + "', " + BillAddr + ", " + 
-                    ShipAddr + ", '" + EMail + "', '" + PhNbr + "', " + OrderNbr + ");" ;
+                    ShipAddr + ", '" + EMail + "', '" + PhNbr + "');" ;
           stmt = sqlConn.createStatement();
           stmt.executeUpdate(createString);  
         } catch (java.sql.SQLException e) {
-            throw new TableException("Unable to create a new Customer in the Database." + "\nDetaill: " + e);
+            throw new TableException("Unable to create a new Customer in the Database." + "\nDetail: " + e);
         }
     }
     
@@ -117,11 +114,11 @@ public class Customer_Table {
           rs = stmt.executeQuery(createString);  
           results = new java.util.ArrayList();
             while (rs.next() == true)
-                results.add(new OrderSystem_Classes.Customer (rs.getInt("CustomerID"), rs.getString("FirstName"), 
-                        rs.getString("LastName"), rs.getInt("BillAddress"), rs.getInt("ShipAddress"), 
-                        rs.getString("EmailAddress"), rs.getString("PhoneNumber"), rs.getInt("OrderIDs")));  
+                results.add(new OrderSystem_Classes.Customer (rs.getInt("CUSTOMER_ID"), rs.getString("FIRST_NAME"), 
+                        rs.getString("LAST_NAME"), rs.getInt("BILL_ADDRESS"), rs.getInt("SHIP_ADDRESS"), 
+                        rs.getString("EMAIL"), rs.getString("PHONE")));  
         }catch (java.sql.SQLException e){
-            throw new TableException("Unable to search Customer Table." + "\nDetaill: " + e);
+            throw new TableException("Unable to search Customer Table." + "\nDetail: " + e);
         }
         return results;
     }

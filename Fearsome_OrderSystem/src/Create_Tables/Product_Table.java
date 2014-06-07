@@ -10,11 +10,11 @@ import DB_Connection.Product_Queries;
 
 /**
  *
- * @author Gregory
+ * @author Bella Belova
  */
 public class Product_Table {
     
-    public static final String PRODUCT_TABLE_NAME = "FEFO_PRODUCTS";
+    public static final String PRODUCT_TABLE_NAME = "3C_PRODUCTS";
     public static java.sql.Connection mysqlConn;
     MYSQL mysql_access;    
     public static class TableException extends Exception{
@@ -55,11 +55,11 @@ public class Product_Table {
             "PROD_DESC varchar(40) NOT NULL, " +
             "PROD_PRICE float NOT NULL, " + 
             "PRIMARY KEY (PROD_ID), " + 
-            "FOREIGN KEY (PROD_ID) REFERENCES FEFO_STOCK_ITEMS (PROD_ID))";
+            "FOREIGN KEY (PROD_ID) REFERENCES 3C_STOCK_ITEMS (PROD_ID))";
             stmt = mysqlConn.createStatement();
             stmt.executeUpdate(createString);
         } catch (java.sql.SQLException e) {
-            throw new TableException("Unable to create " + PRODUCT_TABLE_NAME + "\nDetaill: " + e);
+            throw new TableException("Unable to create " + PRODUCT_TABLE_NAME + "\nDetail: " + e);
         }        
     }
 
@@ -76,7 +76,7 @@ public class Product_Table {
           stmt = mysqlConn.createStatement();
           stmt.executeUpdate(createString);  
         } catch (java.sql.SQLException e) {
-            throw new TableException("Unable to create a new Order in the Database." + "\nDetaill: " + e);
+            throw new TableException("Unable to create a new Order in the Database." + "\nDetail: " + e);
         }
     }
     
@@ -97,7 +97,7 @@ public class Product_Table {
                 results.add(new OrderSystem_Classes.Products (rs.getInt("PROD_ID"), rs.getInt("CATEGORY_ID"), 
                         rs.getString("PROD_NAME"), rs.getString("PROD_DESC"), rs.getInt("PROD_PRICE")));  
         }catch (java.sql.SQLException e){
-            throw new TableException("Unable to search Product Table." + "\nDetaill: " + e);
+            throw new TableException("Unable to search Product Table." + "\nDetail: " + e);
         }
         return results;        
     }

@@ -13,7 +13,7 @@ import DB_Connection.Order_Queries;
  */
 public class Orders_Table {
     
-    public static final String ORDERS_TABLE_NAME = "FEFO_ORDERS";   
+    public static final String ORDERS_TABLE_NAME = "3C_ORDERS";   
     public static java.sql.Connection sqlConn;
     SQL sql_access;
     public static class TableException extends Exception{
@@ -47,15 +47,15 @@ public class Orders_Table {
             //Create the CUSTOMER Table
             createString =
             "create table " + ORDERS_TABLE_NAME + " " + 
-            "(OrderID integer identity (1,1) NOT NULL, " +
-            "CustomerID integer NOT NULL, " +
-            "Financial varchar(50) NULL, " +
-            "OrderDate DATE NULL, " +
-            "PRIMARY KEY (OrderID))";
+            "(ORDER_ID integer identity (1,1) NOT NULL, " +
+            "CUSTOMER_ID integer NOT NULL, " +
+            "FINANCIAL varchar(50) NULL, " +
+            "ORDER_DATE DATE NULL, " +
+            "PRIMARY KEY (ORDER_ID))";
             stmt = sqlConn.createStatement();
             stmt.executeUpdate(createString);
         } catch (java.sql.SQLException e) {
-            throw new TableException("Unable to create " + ORDERS_TABLE_NAME + "\nDetaill: " + e);
+            throw new TableException("Unable to create " + ORDERS_TABLE_NAME + "\nDetail: " + e);
         }        
     }
 
@@ -67,12 +67,12 @@ public class Orders_Table {
         try{
 
           String createString = "SET IDENTITY_INSERT " + ORDERS_TABLE_NAME + " on insert into " + ORDERS_TABLE_NAME + 
-                  " (OrderID, CustomerID, Financial, OrderDate ) VALUES(" + Ord_ID + ", "
+                  " (ORDER_ID, CUSTOMER_ID, FINANCIAL, ORDER_DATE ) VALUES(" + Ord_ID + ", "
                    + Cust_ID + ", '" + Fin + "', '" + Ord_Date  + "' );" ;
           stmt = sqlConn.createStatement();
           stmt.executeUpdate(createString);  
         } catch (java.sql.SQLException e) {
-            throw new TableException("Unable to create a new Order in the Database." + "\nDetaill: " + e);
+            throw new TableException("Unable to create a new Order in the Database." + "\nDetail: " + e);
         }
     }
     
@@ -90,10 +90,10 @@ public class Orders_Table {
           rs = stmt.executeQuery(createString);  
           results = new java.util.ArrayList();
             while (rs.next() == true)
-                results.add(new OrderSystem_Classes.Orders (rs.getInt("Order_ID"), rs.getInt("CustomerID"), 
-                        rs.getString("Financial"), rs.getString("OrderDate")));  
+                results.add(new OrderSystem_Classes.Orders (rs.getInt("ORDER_ID"), rs.getInt("CUSTOMER_ID"), 
+                        rs.getString("FINANCIAL"), rs.getString("ORDER_DATE")));  
         }catch (java.sql.SQLException e){
-            throw new TableException("Unable to search Order Database." + "\nDetaill: " + e);
+            throw new TableException("Unable to search Order Database." + "\nDetail: " + e);
         }
         return results;
     }    

@@ -6,7 +6,7 @@ package OrderSystem_Classes;
 
 /**
  *
- * @author Gregory
+ * @author Bella Belova
  */
 public class Customer {
     
@@ -17,13 +17,12 @@ public class Customer {
     private int     ShipAdddress;
     private String  EmailAddress;
     private String  Customer_Phone;
-    private int     OrderIDs;
     
 
     // Constructor 
     
     public Customer (int CustID, String FName, String LName, int BillAddr, int ShipAddr, 
-                        String EMail, String PhNbr, int OrderID ){
+                        String EMail, String PhNbr){
     
     CustomerID      =  CustID; 
     FirstName       =  FName;
@@ -31,9 +30,7 @@ public class Customer {
     BillAddress     =  BillAddr;
     ShipAdddress    =  ShipAddr;
     EmailAddress    =  EMail;
-    Customer_Phone  =  PhNbr;
-    OrderIDs        =  OrderID;
-    
+    Customer_Phone  =  PhNbr;  
     }
     
     // The output string to pull data from database

@@ -6,12 +6,12 @@ package Msg_Displays;
 
 /**
  *
- * @author Gregory
+ * @author Bella Belova
  */
 
 public class Menu_Item_List {
     
-    private static final String PRODUCT_TABLE_NAME = "FEARSOME_PRODUCT";  
+    private static final String PRODUCT_TABLE_NAME = "3C_PRODUCT";  
     private static java.sql.Connection sqlConn;
     public static class TableException extends Exception{
         TableException(String s){
@@ -40,9 +40,9 @@ public class Menu_Item_List {
             while (rs.next() == true)
                 results.add(new OrderSystem_Classes.Customer (rs.getInt("CustomerID"), rs.getString("FirstName"), 
                         rs.getString("LastName"), rs.getInt("BillAddress"), rs.getInt("ShipAddress"), 
-                        rs.getString("EmailAddress"), rs.getString("PhoneNumber"), rs.getInt("OrderIDs")));  
+                        rs.getString("EmailAddress"), rs.getString("PhoneNumber")));  
         }catch (java.sql.SQLException e){
-            throw new TableException("Unable to Display Items." + "\nDetaill: " + e);
+            throw new TableException("Unable to Display Items." + "\nDetail: " + e);
         }
         return results;
     }

@@ -6,7 +6,7 @@ package OrderSystem_Classes;
 
 /**
  *
- * @author Gregory
+ * @author Bella Belova
  */
 public class Orders {
     

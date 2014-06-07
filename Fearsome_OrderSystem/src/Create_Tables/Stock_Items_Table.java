@@ -9,11 +9,11 @@ import DB_Connection.Stock_Items_Queries;
 
 /**
  *
- * @author Gregory
+ * @author Bella Belova
  */
 public class Stock_Items_Table {
     
-    public static final String STOCK_ITEMS_TABLE_NAME = "FEFO_STOCK_ITEMS";
+    public static final String STOCK_ITEMS_TABLE_NAME = "3C_STOCK_ITEMS";
     public static java.sql.Connection mysqlConn;
     MYSQL mysql_access;
     public static class TableException extends Exception{
@@ -55,7 +55,7 @@ public class Stock_Items_Table {
             stmt = mysqlConn.createStatement();
             stmt.executeUpdate(createString);
         } catch (java.sql.SQLException e) {
-            throw new TableException("Unable to create " + STOCK_ITEMS_TABLE_NAME + "\nDetaill: " + e);
+            throw new TableException("Unable to create " + STOCK_ITEMS_TABLE_NAME + "\nDetail: " + e);
         }        
     }
 
@@ -71,7 +71,7 @@ public class Stock_Items_Table {
           stmt = mysqlConn.createStatement();
           stmt.executeUpdate(createString);  
         } catch (java.sql.SQLException e) {
-            throw new TableException("Unable to create a new Order in the Database." + "\nDetaill: " + e);
+            throw new TableException("Unable to create a new Order in the Database." + "\nDetail: " + e);
         }
     }
         public java.util.ArrayList getAllStocks()
@@ -91,7 +91,7 @@ public class Stock_Items_Table {
                 results.add(new OrderSystem_Classes.Stock_Items (rs.getInt("PROD_ID"), rs.getString("PROD_NAME"), 
                         rs.getInt("STOCK_QTY")));  
         }catch (java.sql.SQLException e){
-            throw new TableException("Unable to search Quantity in Stock_Items Table." + "\nDetaill: " + e);
+            throw new TableException("Unable to search Quantity in Stock_Items Table." + "\nDetail: " + e);
         }
         return results;
     }
