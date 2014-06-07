@@ -4,8 +4,8 @@
  */
 package Create_Tables;
 
-import static Create_Tables.Address_Table.ADDRESS_TABLE_NAME;
-import static Create_Tables.Address_Table.sqlConn;
+import static Create_Tables.AddressDB.ADDRESS_TABLE_NAME;
+import static Create_Tables.AddressDB.sqlConn;
 import  Connect.*;
 
 
@@ -13,7 +13,7 @@ import  Connect.*;
  *
  * @author Bella Belova
  */
-public class Customer_Table {
+public class CustomerDB {
     
     public static final String CUSTOMER_TABLE_NAME = "3C_CUSTOMERS";
     public static java.sql.Connection sqlConn;
@@ -24,7 +24,7 @@ public class Customer_Table {
         }
     }
     
-    public Customer_Table()
+    public CustomerDB()
     {
         sql_access = new SQL();
         sqlConn = Connect.SQL.getSQLConn();
@@ -70,17 +70,17 @@ public class Customer_Table {
     
 /**
  * @author Bella Belova
- * @param CustomerID A unique Customer_Table ID
- * @param FirstName Customer_Table First Name
- * @param LastName Customer_Table Last Name
+ * @param CustomerID A unique CustomerDB ID
+ * @param FirstName CustomerDB First Name
+ * @param LastName CustomerDB Last Name
  * @param BillAddress An integer that except "0" or "1" for checked or unchecked Billing Address
  * @param ShipAddress An integer that except "0" or "1" for checked or unchecked Shipping Address
- * @param EmailAddress Customer_Table EMail Address
+ * @param EmailAddress CustomerDB EMail Address
  * @param PhoneNumber String field that will except parenthesis and numbers
  * @throws TableException This exception represents a problem with the access and updating of the DB table.
  */
     
-    //Insert Customer_Table data
+    //Insert CustomerDB data
     public void createCustomer(int Cust_ID, String FName, String LName, int BillAddr, 
                                         int ShipAddr, String EMail, String PhNbr) 
         throws TableException{
@@ -100,8 +100,9 @@ public class Customer_Table {
         }
     }
     
+    // Query to retrieve all customers from the Customer database
     public static java.util.ArrayList getAllCustomers()
-            throws Address_Table.TableException, TableException{
+            throws AddressDB.TableException, TableException{
         int id; String fn; String ln;
         java.sql.Statement stmt;
         Object p = null;
@@ -122,4 +123,30 @@ public class Customer_Table {
         }
         return results;
     }
+    
+    // Query to search for a Customer by their LAST_NAME
+    public static java.util.ArrayList searchCustbyLastName(String lName)
+            throws TableException{
+        int id; String fn; String ln;
+        java.sql.Statement stmt;
+        Object p = null;
+        java.util.ArrayList results = null;
+        java.sql.ResultSet rs = null;
+        
+        try{
+          String createString = "select * from " + Create_Tables.CustomerDB.CUSTOMER_TABLE_NAME + " where LAST_NAME like '%" + lName + "%';" ;                
+          stmt = Create_Tables.CustomerDB.sqlConn.createStatement();
+          rs = stmt.executeQuery(createString);  
+          results = new java.util.ArrayList();
+            while (rs.next() == true)
+                results.add(new OrderSystem_Classes.Customer (rs.getInt("CUSTOMER_ID"), rs.getString("FIRST_NAME"), 
+                        rs.getString("LAST_NAME"), rs.getInt("BILL_ADDRESS"), rs.getInt("SHIP_ADDRESS"), 
+                        rs.getString("EMAIL"), rs.getString("PHONE")));  
+        }catch (java.sql.SQLException e){
+            throw new TableException("Unable to search Customer Table." + "\nDetail: " + e);
+        }
+        return results;
+    }
+    
+    
 }
