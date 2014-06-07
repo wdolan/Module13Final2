@@ -19,6 +19,7 @@ public class main_class
 		String input;
 		char choice;
 		boolean repeat = true;
+		BufferedReader brin = new BufferedReader(new InputStreamReader(System.in));
 		
 		//initialize database connections
 		//initialize tables
@@ -33,15 +34,15 @@ public class main_class
 		{
 			while(repeat = true)
 			{
-				BufferedReader brin = new BufferedReader(new InputStreamReader(System.in));
 				input = brin.readLine();
+				input = input.toUpperCase();
 				choice = input.charAt(0);
 				
 				System.out.println(choice);
 				switch(choice)
 				{
 					case '1':
-						Menu.browse_menu();
+						Menu.browse_catalog();
 						break;
 					case '2':
 						Menu.view_cart();
