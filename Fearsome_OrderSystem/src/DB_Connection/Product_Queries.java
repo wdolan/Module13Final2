@@ -16,7 +16,7 @@ public class Product_Queries {
         }
     }
 
-        // Query to search Products database by PROD_ID
+        // Query to search Product database by PROD_ID
      public static java.util.ArrayList searchProductsbyProductID(String prodID)
             throws TableException{
         int id; String fn; String ln;
@@ -31,7 +31,7 @@ public class Product_Queries {
           rs = stmt.executeQuery(createString);  
           results = new java.util.ArrayList();
             while (rs.next() == true)
-                results.add(new OrderSystem_Classes.Products (rs.getInt("PROD_ID"), rs.getInt("CATEGORY_ID"), 
+                results.add(new OrderSystem_Classes.Product (rs.getInt("PROD_ID"), rs.getInt("CATEGORY_ID"), 
                         rs.getString("PROD_NAME"), rs.getString("PROD_DESC"), rs.getInt("PROD_PRICE")));  
         }catch (java.sql.SQLException e){
             throw new TableException("Unable to search Product ID in Product Table." + "\nDetail: " + e);
@@ -53,7 +53,7 @@ public class Product_Queries {
           rs = stmt.executeQuery(createString);  
           results = new java.util.ArrayList();
             while (rs.next() == true)
-                results.add(new OrderSystem_Classes.Products (rs.getInt("PROD_ID"), rs.getInt("CATEGORY_ID"), 
+                results.add(new OrderSystem_Classes.Product (rs.getInt("PROD_ID"), rs.getInt("CATEGORY_ID"), 
                         rs.getString("PROD_NAME"), rs.getString("PROD_DESC"), rs.getInt("PROD_PRICE")));  
         }catch (java.sql.SQLException e){
             throw new TableException("Unable to search Product Table." + "\nDetail: " + e);

@@ -94,7 +94,7 @@ public class Product_Table {
           rs = stmt.executeQuery(createString);  
           results = new java.util.ArrayList();
             while (rs.next() == true)
-                results.add(new OrderSystem_Classes.Products (rs.getInt("PROD_ID"), rs.getInt("CATEGORY_ID"), 
+                results.add(new OrderSystem_Classes.Product (rs.getInt("PROD_ID"), rs.getInt("CATEGORY_ID"), 
                         rs.getString("PROD_NAME"), rs.getString("PROD_DESC"), rs.getInt("PROD_PRICE")));  
         }catch (java.sql.SQLException e){
             throw new TableException("Unable to search Product Table." + "\nDetail: " + e);

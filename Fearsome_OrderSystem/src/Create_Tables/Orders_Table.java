@@ -90,7 +90,7 @@ public class Orders_Table {
           rs = stmt.executeQuery(createString);  
           results = new java.util.ArrayList();
             while (rs.next() == true)
-                results.add(new OrderSystem_Classes.Orders (rs.getInt("ORDER_ID"), rs.getInt("CUSTOMER_ID"), 
+                results.add(new OrderSystem_Classes.Order (rs.getInt("ORDER_ID"), rs.getInt("CUSTOMER_ID"), 
                         rs.getString("FINANCIAL"), rs.getString("ORDER_DATE")));  
         }catch (java.sql.SQLException e){
             throw new TableException("Unable to search Order Database." + "\nDetail: " + e);

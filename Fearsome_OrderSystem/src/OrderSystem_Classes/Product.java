@@ -8,7 +8,7 @@ package OrderSystem_Classes;
  *
  * @author Bella Belova
  */
-public class Products {
+public class Product {
     
     private int ProductID;
     private int Category_ID;
@@ -21,7 +21,7 @@ public class Products {
 
     // Constructor
     
-    public Products (int ProdID, int CategID, String ProdName, String ProdDesc, float ProdPrice) {
+    public Product (int ProdID, int CategID, String ProdName, String ProdDesc, float ProdPrice) {
         
         ProductID = ProdID;
         Category_ID = CategID;

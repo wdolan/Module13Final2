@@ -93,7 +93,7 @@ public class Items_Table {
           rs = stmt.executeQuery(createString);  
           results = new java.util.ArrayList();
             while (rs.next() == true)
-                results.add(new OrderSystem_Classes.OrderItems (rs.getInt("ORDER_ITEM_ID"), rs.getInt("ORDER_ID"), 
+                results.add(new OrderSystem_Classes.OrderItem (rs.getInt("ORDER_ITEM_ID"), rs.getInt("ORDER_ID"), 
                         rs.getInt("PRODUCT_ID"), rs.getInt("QUANTITY"), rs.getFloat("PROD_PRICE")));  
         }catch (java.sql.SQLException e){
             throw new TableException("Unable to search Item Database." + "\nDetail: " + e);
