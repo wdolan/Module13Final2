@@ -10,26 +10,26 @@ import Create_Tables.*;
  * @author Bella Belova
  */
 public class DataLoad {
-    Address_Table address_data;
-    Customer_Table customer_data;
-    Items_Table item_order_data;
-    Orders_Table orders_data;
-    Product_Table product_data;
-    Stock_Items_Table stock_item_data;
+    AddressDB address_data;
+    CustomerDB customer_data;
+    OrderItemsDB item_order_data;
+    OrdersDB orders_data;
+    ProductDB product_data;
+    StockItemsDB stock_item_data;
     int max_index;
     int index;
 
     public DataLoad()
     {
-        address_data = new Address_Table();
-        customer_data = new Customer_Table();
-        item_order_data = new Items_Table();
-        orders_data = new Orders_Table();
-        product_data = new Product_Table();
-        stock_item_data = new Stock_Items_Table();
+        address_data = new AddressDB();
+        customer_data = new CustomerDB();
+        item_order_data = new OrderItemsDB();
+        orders_data = new OrdersDB();
+        product_data = new ProductDB();
+        stock_item_data = new StockItemsDB();
     }
     
-    public void load_data() throws Address_Table.TableException, Items_Table.TableException, Orders_Table.TableException
+    public void load_data() throws AddressDB.TableException, OrderItemsDB.TableException, OrdersDB.TableException
     {
         /*
     Tables create:
@@ -78,8 +78,8 @@ public class DataLoad {
                 // Order Table
         try {
             orders_data.reset();
-            orders_data.createOrder(77777, 10005, "1234567812348965", "12/27/2005");
-            orders_data.createOrder(77712, 10012, "7896123645691025", "5/14/1998");
+            orders_data.createOrder(77777, 10005, "1234567812348965", "12/27/2005", 59.99f);
+            orders_data.createOrder(77712, 10012, "7896123645691025", "5/14/1998", 69.99f);
             java.util.ArrayList results  = orders_data.getAllOrders();
             max_index = results.size();
             System.out.println("Order Table:\n");
@@ -110,8 +110,11 @@ public class DataLoad {
         // Stock Items
         try {
             stock_item_data.reset();
-            stock_item_data.createOrder(7896, "hat", 8);
-            stock_item_data.createOrder(7589, "gloves", 12);
+            stock_item_data.createItems(1001, "Hat", 9971);
+            stock_item_data.createItems(1002, "T-shirt", 9808);
+            stock_item_data.createItems(1003, "T-shirt, black", 10000);
+            stock_item_data.createItems(1005, "Jacket", 10000);
+            stock_item_data.createItems(2001, "Mug", 10000);
             java.util.ArrayList results  = stock_item_data.getAllStocks();
             max_index = results.size();
             System.out.println("Stock Items Table:\n");
@@ -128,8 +131,8 @@ public class DataLoad {
         // Product
         try {
             product_data.reset();
-            product_data.createOrder(7896, 12, "hat", "red had", 1.25f);
-            product_data.createOrder(7589, 78, "gloves", "white gloves", 5.99f);
+            product_data.createProduct(7896, 12, "hat", "red had", 1.25f);
+            product_data.createProduct(7589, 78, "gloves", "white gloves", 5.99f);
             java.util.ArrayList results  = product_data.getAllProducts();
             max_index = results.size();
             System.out.println("Product Table:\n");
