@@ -33,7 +33,7 @@ public class Order_Queries {
           results = new java.util.ArrayList();
             while (rs.next() == true)
                 results.add(new OrderSystem_Classes.Orders (rs.getInt("ORDER_ID"), rs.getInt("CUSTOMER_ID"), 
-                        rs.getString("FINANCIAL"), rs.getString("ORDER_DATE")));  
+                        rs.getString("FINANCIAL"), rs.getString("ORDER_DATE"), rs.getFloat("ORDER_TOTAL")));  
         }catch (java.sql.SQLException e){
             throw new TableException("Unable to search Order Database." + "\nDetail: " + e);
         }
