@@ -8,6 +8,8 @@ package Msg_Displays;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import OrderSystem_Classes.Order;
+import OrderSystem_Classes.OrderItem;
 
 /**
  *
@@ -23,6 +25,7 @@ public class Menu {
 	private static String input;
 	private static char choice;
 	private static BufferedReader brin = new BufferedReader(new InputStreamReader(System.in));
+	private static Order cart;
 	
 	/**
 	 * Presents the main menu options.
@@ -40,9 +43,10 @@ public class Menu {
 	/**
 	 * Presents the full catalog for browsing and selection.
 	 */
-	public static void browse_catalog()
+	public static void browse_catalog(Order current_cart)
 	{
 		returntomain = false;
+		cart = current_cart;
 		System.out.println("Full catalog:");
 		
 		//get all products
@@ -74,7 +78,7 @@ public class Menu {
 						break;
 					case '2':
 						//TESTING CASE to actually be able to see product_details
-						product_details(2);
+						product_details(cart, 2);
 						break;
 					case '3':
 						
@@ -111,9 +115,10 @@ public class Menu {
 	 * Presents the details on a specific product and allows selecting a quantity to order.
 	 * @param prodID
 	 */
-	public static void product_details(int prodID)
+	public static void product_details(Order current_cart, int prodID)
 	{
 		returntomain = false;
+		cart = current_cart;
 		System.out.println("Product details:");
 		
 		//reformat and display full product details
@@ -139,10 +144,10 @@ public class Menu {
 				switch(choice)
 				{
 					case 'B':
-						browse_catalog();
+						browse_catalog(cart);
 						break;
 					case 'C':
-						view_cart();
+						view_cart(cart);
 						break;
 					case 'M':
 						main_menu();
@@ -157,7 +162,8 @@ public class Menu {
 					default:
 						if(choice >= '0' && choice <= '9')
 						{
-							//set product quantity to choice and add to order
+							//OrderItem item = new OrderItem(prodID, choice, price, prodname);
+							//cart.addOrderItem(item);
 							
 							System.out.println(choice + " products added to order. Please make a menu selection:");
 							System.out.println("B. Browse product catalog");
@@ -189,10 +195,11 @@ public class Menu {
 	/**
 	 * Presents the current cart.
 	 */
-	public static void view_cart()
+	public static void view_cart(Order current_cart)
 	{
 		returntomain = false;
 		boolean cart_empty = false;
+		cart = current_cart;
 		System.out.println("Your cart:");
 		
 		//display current cart, or "Your cart is empty" message
@@ -225,7 +232,7 @@ public class Menu {
 						//confirm the cart is not empty before calling place_order
 						if(cart_empty == false)
 						{
-							place_order();
+							place_order(cart);
 						} //end if
 						else
 						{
@@ -265,9 +272,10 @@ public class Menu {
 	 * Presents options which allow modifying the quantity of an ordered item or removing it from the cart.
 	 * @param orderItemID 
 	 */
-	public static void modify_cart_item(int orderItemID)
+	public static void modify_cart_item(Order current_cart, int orderItemID)
 	{
 		returntomain = false;
+		cart = current_cart;
 		System.out.println("Selected cart item:");
 		
 		//product details
@@ -315,7 +323,7 @@ public class Menu {
 						} //end while						
 						break;
 					case 'C':
-						view_cart();
+						view_cart(cart);
 						break;
 					case 'M':
 						main_menu();
@@ -348,10 +356,11 @@ public class Menu {
 	/**
 	 * Presents the cart and begins the procedure to finalize an order.
 	 */
-	public static void place_order()
+	public static void place_order(Order current_cart)
 	{
 		returntomain = false;
 		boolean cart_empty = false;
+		cart = current_cart;
 		System.out.println("Place order:");
 		
 		//display current cart or empty cart
@@ -377,12 +386,12 @@ public class Menu {
 				switch(choice)
 				{
 					case '1':
-						view_cart();
+						view_cart(cart);
 						break;
 					case '2':
 						if(cart_empty = false)
 						{
-							confirm_order();
+							confirm_order(cart);
 						} //end if
 						else
 						{
@@ -420,9 +429,10 @@ public class Menu {
 	/**
 	 * Presents the shipping and billing addresses for confirmation and finalizes the order.
 	 */
-	public static void confirm_order()
+	public static void confirm_order(Order current_cart)
 	{
 		returntomain = false;
+		cart = current_cart;
 		System.out.println("Confirm order:");
 		
 		//format billing/shipping addresses

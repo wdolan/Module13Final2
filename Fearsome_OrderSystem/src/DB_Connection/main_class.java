@@ -7,6 +7,8 @@ package DB_Connection;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import Msg_Displays.Menu;
+import OrderSystem_Classes.Order;
+import OrderSystem_Classes.OrderItem;
 /**
  *
  * @author Amy Roberts
@@ -20,6 +22,7 @@ public class main_class
 		char choice;
 		boolean repeat = true;
 		BufferedReader brin = new BufferedReader(new InputStreamReader(System.in));
+		Order cart = new Order(1);
 		
 		//initialize database connections
 		//initialize tables
@@ -42,13 +45,13 @@ public class main_class
 				switch(choice)
 				{
 					case '1':
-						Menu.browse_catalog();
+						Menu.browse_catalog(cart);
 						break;
 					case '2':
-						Menu.view_cart();
+						Menu.view_cart(cart);
 						break;
 					case '3':
-						Menu.place_order();
+						Menu.place_order(cart);
 						break;
 					case 'X':
 						System.out.println("Goodbye! Thank you for shopping with us!");
@@ -67,5 +70,5 @@ public class main_class
 		} //end catch
 		
 		
-	}
-}
+	} //end main
+} //end class
