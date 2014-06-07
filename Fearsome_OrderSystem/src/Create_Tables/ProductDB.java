@@ -5,14 +5,13 @@
 package Create_Tables;
 
 import Connect.*;
-import DB_Connection.Product_Queries;
 
 
 /**
  *
  * @author Bella Belova
  */
-public class Product_Table {
+public class ProductDB {
     
     public static final String PRODUCT_TABLE_NAME = "3C_PRODUCTS";
     public static java.sql.Connection mysqlConn;
@@ -23,14 +22,14 @@ public class Product_Table {
         }
     }
     
-    public Product_Table()
+    public ProductDB()
     {
         mysql_access = new MYSQL();
         mysqlConn = Connect.MYSQL.getMSQLConn();
     }
     
    
-        // Drop Table
+    // Drop any existing 3C_PRODUCTS Table
     
     public void reset()throws TableException{
         String createString;    
@@ -45,8 +44,8 @@ public class Product_Table {
                 System.err.println(e); 
         }
         
+        //Create the 3C_PRODUCTS Table
         try{
-            //Create the CUSTOMER Table
             createString =
             "create table " + PRODUCT_TABLE_NAME + " " + 
             "(PROD_ID integer NOT NULL, " + 
@@ -63,8 +62,8 @@ public class Product_Table {
         }        
     }
 
-            //Insert Items data
-    public void createOrder(int Prod_ID, int Categ_ID, String Prod_Name, String Prod_Desc, float Prod_Price) 
+     //Insert new product into 3C_PRODUCTS database
+    public void createProduct(int Prod_ID, int Categ_ID, String Prod_Name, String Prod_Desc, float Prod_Price) 
         throws TableException{
     
     java.sql.Statement stmt;
@@ -81,7 +80,7 @@ public class Product_Table {
     }
     
         public  java.util.ArrayList getAllProducts()
-            throws Product_Queries.TableException, TableException{
+            throws ProductDB.TableException, TableException{
         int id; String fn; String ln;
         java.sql.Statement stmt;
         Object p = null;
@@ -91,6 +90,51 @@ public class Product_Table {
         try{
           String createString = "select * from " + PRODUCT_TABLE_NAME + " ;" ;                
           stmt = mysqlConn.createStatement();
+          rs = stmt.executeQuery(createString);  
+          results = new java.util.ArrayList();
+            while (rs.next() == true)
+                results.add(new OrderSystem_Classes.Products (rs.getInt("PROD_ID"), rs.getInt("CATEGORY_ID"), 
+                        rs.getString("PROD_NAME"), rs.getString("PROD_DESC"), rs.getInt("PROD_PRICE")));  
+        }catch (java.sql.SQLException e){
+            throw new TableException("Unable to search Product Table." + "\nDetail: " + e);
+        }
+        return results;        
+    }
+
+        // Query to search Products database by PROD_ID
+     public static java.util.ArrayList searchProductsbyProductID(String prodID)
+            throws TableException{
+        int id; String fn; String ln;
+        java.sql.Statement stmt;
+        Object p = null;
+        java.util.ArrayList results = null;
+        java.sql.ResultSet rs = null;
+        
+        try{
+          String createString = "select * from " + Create_Tables.ProductDB.PRODUCT_TABLE_NAME + " where PROD_ID like " + prodID + ";" ;                
+          stmt = Create_Tables.ProductDB.mysqlConn.createStatement();
+          rs = stmt.executeQuery(createString);  
+          results = new java.util.ArrayList();
+            while (rs.next() == true)
+                results.add(new OrderSystem_Classes.Products (rs.getInt("PROD_ID"), rs.getInt("CATEGORY_ID"), 
+                        rs.getString("PROD_NAME"), rs.getString("PROD_DESC"), rs.getInt("PROD_PRICE")));  
+        }catch (java.sql.SQLException e){
+            throw new TableException("Unable to search Product ID in Product Table." + "\nDetail: " + e);
+        }
+        return results;
+ }  
+    // Query for all Products in the 3C_PRODUCTS database    
+    public static java.util.ArrayList searchALLProducts()
+            throws TableException{
+        int id; String fn; String ln;
+        java.sql.Statement stmt;
+        Object p = null;
+        java.util.ArrayList results = null;
+        java.sql.ResultSet rs = null;
+        
+        try{
+          String createString = "select * from " + Create_Tables.ProductDB.PRODUCT_TABLE_NAME + " ;" ;                
+          stmt = Create_Tables.ProductDB.mysqlConn.createStatement();
           rs = stmt.executeQuery(createString);  
           results = new java.util.ArrayList();
             while (rs.next() == true)

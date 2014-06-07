@@ -12,7 +12,7 @@ import Connect.*;
  *
  * @author Bella Belova
  */
-public class Address_Table {
+public class AddressDB {
     
     public static final String ADDRESS_TABLE_NAME = "3C_ADDRESS";  
     public static java.sql.Connection sqlConn;
@@ -23,7 +23,7 @@ public class Address_Table {
         }
     }
     
-    public Address_Table()
+    public AddressDB()
     {
         sql_access = new SQL();
         sqlConn = Connect.SQL.getSQLConn();
@@ -45,7 +45,7 @@ public class Address_Table {
         }
         
         try{
-            //Create the CUSTOMER Table
+            //Create the Address Table
             createString =
             "create table " + ADDRESS_TABLE_NAME + " " + 
             "(ADDRESS_ID integer identity (1,1) NOT NULL, " +
@@ -65,7 +65,7 @@ public class Address_Table {
         }        
     }
 
-        //Insert Address_Table data
+        //Insert AddressDB data
     public void createAddress(int Addr_ID, int Cust_ID, String Addr_Type,
                                         String Addr1, String Addr2, String Addr_City, String Addr_State, int Addr_Zip) 
         throws TableException{
@@ -108,4 +108,32 @@ public class Address_Table {
         return results;
     }
 
+     // Query to search for addresses by CUSTOMER_ID
+    public static java.util.ArrayList searchAddbyCustomerID(int custID)
+            throws TableException{
+        int id; String fn; String ln;
+        java.sql.Statement stmt;
+        Object p = null;
+        java.util.ArrayList results = null;
+        java.sql.ResultSet rs = null;
+        
+        try{
+          String createString = "select * from " + Create_Tables.AddressDB.ADDRESS_TABLE_NAME + " where CUSTOMER_ID like " + custID + ";" ;                
+          stmt = Create_Tables.AddressDB.sqlConn.createStatement();
+          rs = stmt.executeQuery(createString);  
+          results = new java.util.ArrayList();
+            while (rs.next() == true)
+                results.add(new OrderSystem_Classes.Address (rs.getInt("ADDRESS_ID"), rs.getInt("CUSTOMER_ID"), 
+                        rs.getString("ADDRESS_TYPE"), rs.getString("ADDRESS1"), rs.getString("ADDRESS2"), 
+                        rs.getString("CITY"), rs.getString("STATE"), rs.getInt("ZIP")));  
+        }catch (java.sql.SQLException e){
+            throw new TableException("Unable to search Address Table." + "\nDetail: " + e);
+        }
+        return results;
+    }
+
+    
+    
+    
+    
 }
