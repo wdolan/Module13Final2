@@ -40,7 +40,7 @@ public class Menu {
 	/**
 	 * Presents the full catalog for browsing and selection.
 	 */
-	public static void browse_menu()
+	public static void browse_catalog()
 	{
 		returntomain = false;
 		System.out.println("Full catalog:");
@@ -73,7 +73,8 @@ public class Menu {
 						//product_details(prodID);
 						break;
 					case '2':
-						
+						//TESTING CASE to actually be able to see product_details
+						product_details(2);
 						break;
 					case '3':
 						
@@ -108,6 +109,7 @@ public class Menu {
 	
 	/**
 	 * Presents the details on a specific product and allows selecting a quantity to order.
+	 * @param prodID
 	 */
 	public static void product_details(int prodID)
 	{
@@ -116,11 +118,71 @@ public class Menu {
 		
 		//reformat and display full product details
 		
-		System.out.println("C. Back to product catalog");
+		System.out.println("B. Browse product catalog");
+		System.out.println("C. View shopping cart");
 		System.out.println("M. Main menu");
 		System.out.println("X. Exit program\n");
 		System.out.println("Please enter how many of this product you would like to order, or make a menu selection.");
 		System.out.println("What is your selection?");
+		
+		//take user input and switch based on choice
+		try
+		{
+			repeat = true;
+			while(repeat = true) 
+			{
+				input = brin.readLine();
+				input = input.toUpperCase();
+				choice = input.charAt(0);
+				
+				System.out.println(choice);
+				switch(choice)
+				{
+					case 'B':
+						browse_catalog();
+						break;
+					case 'C':
+						view_cart();
+						break;
+					case 'M':
+						main_menu();
+						repeat = false;
+						returntomain = true;
+						break;
+					case 'X':
+						System.out.println("Goodbye! Thank you for shopping with us!");
+						repeat = false;
+						System.exit(0);
+						break;
+					default:
+						if(choice >= '0' && choice <= '9')
+						{
+							//set product quantity to choice and add to order
+							
+							System.out.println(choice + " products added to order. Please make a menu selection:");
+							System.out.println("B. Browse product catalog");
+							System.out.println("C. View shopping cart");
+							System.out.println("M. Main menu");
+							System.out.println("X. Exit program\n");
+						} //end if
+						else
+						{
+							System.out.println("Sorry, invalid selection. Please select an option from the menu above or a number of products to order: ");
+						}					
+						
+				} //end switch
+				
+				if(returntomain == true)
+				{
+					return;
+				} //end if
+				
+			} //end while loop
+		} //end try
+		catch (Exception e)
+		{
+			System.err.println("Error: " + e);
+		} //end catch
 	} //end product_details
 	
 	
@@ -130,16 +192,143 @@ public class Menu {
 	public static void view_cart()
 	{
 		returntomain = false;
+		boolean cart_empty = false;
 		System.out.println("Your cart:");
 		
 		//display current cart, or "Your cart is empty" message
+		//cart_empty = true if cart is empty
 		
 		System.out.println("P. Place order");
 		System.out.println("M. Main menu");
 		System.out.println("X. Exit program\n");
 		System.out.println("Please select a line number to modify that item, or make a menu selection.");
 		System.out.println("What is your selection?");
+		
+		//take user input and switch based on choice
+		try
+		{
+			repeat = true;
+			while(repeat = true) 
+			{
+				input = brin.readLine();
+				input = input.toUpperCase();
+				choice = input.charAt(0);
+				
+				System.out.println(choice);
+				switch(choice)
+				{
+					case '1':
+						//pull data from array and pass to modify_cart_item
+						//modify_cart_item(id);
+						break;
+					case 'P':
+						//confirm the cart is not empty before calling place_order
+						if(cart_empty == false)
+						{
+							place_order();
+						} //end if
+						else
+						{
+							System.out.println("Sorry, you cannot place an order with an empty cart.");
+						} //end else
+						break;
+					case 'M':
+						main_menu();
+						repeat = false;
+						returntomain = true;
+						break;
+					case 'X':
+						System.out.println("Goodbye! Thank you for shopping with us!");
+						repeat = false;
+						System.exit(0);
+						break;
+					default:						
+						System.out.println("Sorry, invalid selection. Please select an option from the menu above or an item to modify: ");				
+						
+				} //end switch
+				
+				if(returntomain == true)
+				{
+					return;
+				} //end if
+				
+			} //end while loop
+		} //end try
+		catch (Exception e)
+		{
+			System.err.println("Error: " + e);
+		} //end catch
+		
 	} //end view_cart
+	
+	/**
+	 * Presents options which allow modifying the quantity of an ordered item or removing it from the cart.
+	 * @param orderItemID 
+	 */
+	public static void modify_cart_item(int orderItemID)
+	{
+		returntomain = false;
+		System.out.println("Selected cart item:");
+		
+		//product details
+		
+		System.out.println("1. Remove this item from cart");
+		System.out.println("2. Change quantity of item in cart");
+		System.out.println("C. View shopping cart");
+		System.out.println("M. Main menu");
+		System.out.println("X. Exit program\n");
+		
+		//take user input and switch based on choice
+		try
+		{
+			repeat = true;
+			while(repeat = true) 
+			{
+				input = brin.readLine();
+				input = input.toUpperCase();
+				choice = input.charAt(0);
+				
+				System.out.println(choice);
+				switch(choice)
+				{
+					case '1':
+						//remove product from array
+						System.out.println("This item has been removed from your cart.");
+						break;
+					case '2':
+						System.out.println("How many of this product would you like?");
+						//update quantity of item
+						break;
+					case 'C':
+						view_cart();
+						break;
+					case 'M':
+						main_menu();
+						repeat = false;
+						returntomain = true;
+						break;
+					case 'X':
+						System.out.println("Goodbye! Thank you for shopping with us!");
+						repeat = false;
+						System.exit(0);
+						break;
+					default:
+						System.out.println("Sorry, invalid selection. Please select an option from the menu above: ");
+				} //end switch
+				
+				if(returntomain == true)
+				{
+					return;
+				} //end if
+				
+			} //end while loop
+		} //end try
+		catch (Exception e)
+		{
+			System.err.println("Error: " + e);
+		} //end catch
+		
+	}
 	
 	/**
 	 * Presents the cart and begins the procedure to finalize an order.
@@ -147,15 +336,70 @@ public class Menu {
 	public static void place_order()
 	{
 		returntomain = false;
+		boolean cart_empty = false;
 		System.out.println("Place order:");
 		
-		//display current cart
+		//display current cart or empty cart
+		//set empty_cart flag if cart is empty
 		
 		System.out.println("1. Make changes to this order");
 		System.out.println("2. Place this order");
 		System.out.println("M. Main menu");
 		System.out.println("X. Exit program\n");
 		System.out.println("Please make a selection: ");
+		
+		//take user input and switch based on choice
+		try
+		{
+			repeat = true;
+			while(repeat = true) 
+			{
+				input = brin.readLine();
+				input = input.toUpperCase();
+				choice = input.charAt(0);
+				
+				System.out.println(choice);
+				switch(choice)
+				{
+					case '1':
+						view_cart();
+						break;
+					case '2':
+						if(cart_empty = false)
+						{
+							confirm_order();
+						} //end if
+						else
+						{
+							System.out.println("Sorry, you cannot place an order with an empty cart.");
+						} //end else
+						break;
+					case 'M':
+						main_menu();
+						repeat = false;
+						returntomain = true;
+						break;
+					case 'X':
+						System.out.println("Goodbye! Thank you for shopping with us!");
+						repeat = false;
+						System.exit(0);
+						break;
+					default:
+						System.out.println("Sorry, invalid selection. Please select an option from the menu above: ");
+				} //end switch
+				
+				if(returntomain == true)
+				{
+					return;
+				} //end if
+				
+			} //end while loop
+		} //end try
+		catch (Exception e)
+		{
+			System.err.println("Error: " + e);
+		} //end catch
+		
 	} //end place_order
 	
 	/**
@@ -173,6 +417,52 @@ public class Menu {
 		System.out.println("M. Main menu");
 		System.out.println("X. Exit program\n");
 		System.out.println("Please make a selection: ");
+		
+		//take user input and switch based on choice
+		try
+		{
+			repeat = true;
+			while(repeat = true) 
+			{
+				input = brin.readLine();
+				input = input.toUpperCase();
+				choice = input.charAt(0);
+				
+				System.out.println(choice);
+				switch(choice)
+				{
+					case '1':
+						//place order
+						break;
+					case '2':
+						System.out.println("Sorry, modifying customer addresses is not currently implemented.");
+						System.out.println("Please make another selection.");
+						break;
+					case 'M':
+						main_menu();
+						repeat = false;
+						returntomain = true;
+						break;
+					case 'X':
+						System.out.println("Goodbye! Thank you for shopping with us!");
+						repeat = false;
+						System.exit(0);
+						break;
+					default:
+						System.out.println("Sorry, invalid selection. Please select an option from the menu above: ");
+				} //end switch
+				
+				if(returntomain == true)
+				{
+					return;
+				} //end if
+				
+			} //end while loop
+		} //end try
+		catch (Exception e)
+		{
+			System.err.println("Error: " + e);
+		} //end catch
 		
 	} //end confirm_order
 
