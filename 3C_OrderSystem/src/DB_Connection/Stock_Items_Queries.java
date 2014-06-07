@@ -15,8 +15,8 @@ public class Stock_Items_Queries {
             super(s);
         }
     }
-    // Query to search Stock Items Database for current Stock Quantity by PROD_ID
-    public static java.util.ArrayList searchforStockQTY(int prodID)
+
+    public static java.util.ArrayList searchQTY(int PROD_ID)
             throws TableException{
         int id; String fn; String ln;
         java.sql.Statement stmt;
@@ -25,7 +25,7 @@ public class Stock_Items_Queries {
         java.sql.ResultSet rs = null;
         
         try{
-          String createString = "select * from " + Create_Tables.Stock_Items_Table.STOCK_ITEMS_TABLE_NAME + " where PROD_ID " + prodID + ";" ;                
+          String createString = "select * from " + Create_Tables.Stock_Items_Table.STOCK_ITEMS_TABLE_NAME + " where PROD_ID " + PROD_ID + ";" ;                
           stmt = Create_Tables.Stock_Items_Table.mysqlConn.createStatement();
           rs = stmt.executeQuery(createString);  
           results = new java.util.ArrayList();

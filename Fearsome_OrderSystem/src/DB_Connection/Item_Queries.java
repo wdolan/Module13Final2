@@ -15,8 +15,8 @@ public class Item_Queries {
             super(s);
         }
      }    
-    // Search table data
-    public static java.util.ArrayList searchbyItemID(int Item_ID)
+    // Query to search for Items by ITEM_ID
+    public static java.util.ArrayList searchItemsbyItemID(int itemID)
             throws TableException{
         int id; String fn; String ln;
         java.sql.Statement stmt;
@@ -25,15 +25,15 @@ public class Item_Queries {
         java.sql.ResultSet rs = null;
         
         try{
-          String createString = "select * from " + Create_Tables.Items_Table.ITEMS_TABLE_NAME + " where Order_Item_ID like " + Item_ID + ";" ;                
+          String createString = "select * from " + Create_Tables.Items_Table.ITEMS_TABLE_NAME + " where ORDER_ITEM_ID like " + itemID + ";" ;                
           stmt = Create_Tables.Items_Table.sqlConn.createStatement();
           rs = stmt.executeQuery(createString);  
           results = new java.util.ArrayList();
             while (rs.next() == true)
-                results.add(new OrderSystem_Classes.Items (rs.getInt("Order_Item_ID"), rs.getInt("OrderID"), 
-                        rs.getInt("ProductID"), rs.getInt("Quantaty")));  
+                results.add(new OrderSystem_Classes.OrderItems (rs.getInt("ORDER_ITEM_ID"), rs.getInt("ORDER_ID"), 
+                        rs.getInt("PRODUCT_ID"), rs.getInt("QUANTITY"), rs.getFloat("PROD_PRICE")));  
         }catch (java.sql.SQLException e){
-            throw new TableException("Unable to search Item Database." + "\nDetaill: " + e);
+            throw new TableException("Unable to search Item Database." + "\nDetail: " + e);
         }
         return results;
     

@@ -47,11 +47,11 @@ public class Orders_Table {
             //Create the CUSTOMER Table
             createString =
             "create table " + ORDERS_TABLE_NAME + " " + 
-            "(ORDER_ID integer identity (1,1) NOT NULL, " +
-            "CUSTOMER_ID integer NOT NULL, " +
-            "FINANCIAL varchar(50) NULL, " +
-            "ORDER_DATE DATE NULL, " +
-            "PRIMARY KEY (ORDER_ID))";
+            "(OrderID integer identity (1,1) NOT NULL, " +
+            "CustomerID integer NOT NULL, " +
+            "Financial varchar(50) NULL, " +
+            "OrderDate DATE NULL, " +
+            "PRIMARY KEY (OrderID))";
             stmt = sqlConn.createStatement();
             stmt.executeUpdate(createString);
         } catch (java.sql.SQLException e) {
@@ -67,7 +67,7 @@ public class Orders_Table {
         try{
 
           String createString = "SET IDENTITY_INSERT " + ORDERS_TABLE_NAME + " on insert into " + ORDERS_TABLE_NAME + 
-                  " (ORDER_ID, CUSTOMER_ID, FINANCIAL, ORDER_DATE ) VALUES(" + Ord_ID + ", "
+                  " (OrderID, CustomerID, Financial, OrderDate ) VALUES(" + Ord_ID + ", "
                    + Cust_ID + ", '" + Fin + "', '" + Ord_Date  + "' );" ;
           stmt = sqlConn.createStatement();
           stmt.executeUpdate(createString);  
@@ -90,8 +90,8 @@ public class Orders_Table {
           rs = stmt.executeQuery(createString);  
           results = new java.util.ArrayList();
             while (rs.next() == true)
-                results.add(new OrderSystem_Classes.Orders (rs.getInt("ORDER_ID"), rs.getInt("CUSTOMER_ID"), 
-                        rs.getString("FINANCIAL"), rs.getString("ORDER_DATE")));  
+                results.add(new OrderSystem_Classes.Orders (rs.getInt("Order_ID"), rs.getInt("CustomerID"), 
+                        rs.getString("Financial"), rs.getString("OrderDate")));  
         }catch (java.sql.SQLException e){
             throw new TableException("Unable to search Order Database." + "\nDetail: " + e);
         }

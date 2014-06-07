@@ -17,8 +17,8 @@ public class Order_Queries {
         }
     }
     
-        // Query to search orders by the ORDER_ID
-    public static java.util.ArrayList searchOrdersbyOrderID(int orderID)
+        // Search table data
+    public static java.util.ArrayList searchbyOrder(int Order_ID)
             throws TableException{
         int id; String fn; String ln;
         java.sql.Statement stmt;
@@ -27,13 +27,13 @@ public class Order_Queries {
         java.sql.ResultSet rs = null;
         
         try{
-          String createString = "select * from " + Create_Tables.Orders_Table.ORDERS_TABLE_NAME + " where ORDER_ID like " + orderID + ";" ;                
+          String createString = "select * from " + Create_Tables.Orders_Table.ORDERS_TABLE_NAME + " where OrderID like " + Order_ID + ";" ;                
           stmt = Create_Tables.Orders_Table.sqlConn.createStatement();
           rs = stmt.executeQuery(createString);  
           results = new java.util.ArrayList();
             while (rs.next() == true)
-                results.add(new OrderSystem_Classes.Orders (rs.getInt("ORDER_ID"), rs.getInt("CUSTOMER_ID"), 
-                        rs.getString("FINANCIAL"), rs.getString("ORDER_DATE")));  
+                results.add(new OrderSystem_Classes.Orders (rs.getInt("Order_ID"), rs.getInt("CustomerID"), 
+                        rs.getString("Financial"), rs.getString("OrderDate")));  
         }catch (java.sql.SQLException e){
             throw new TableException("Unable to search Order Database." + "\nDetail: " + e);
         }
