@@ -6,7 +6,7 @@ package OrderSystem_Classes;
 
 /**
  *
- * @author Bella Belova
+ * @author Amy Roberts
  */
 public class Address
 {
