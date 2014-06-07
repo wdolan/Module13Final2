@@ -6,16 +6,16 @@ package OrderSystem_Classes;
 
 /**
  *
- * @author Gregory
+ * @author Bella Belova
  */
-public class Items {
+public class OrderItems {
     
     private int OrderItemID;
     private int OrderID;
     private int ProductID;
     private int Quantity;
     
-    public Items (int OrdItemID, int OrdID, int ProdID, int Qty) {
+    public OrderItems (int OrdItemID, int OrdID, int ProdID, int Qty) {
         
         OrderItemID = OrdItemID;
         OrderID = OrdID;

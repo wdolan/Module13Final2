@@ -47,13 +47,12 @@ public class Items_Table {
             //Create the Items_Table Table
             createString =
             "create table " + ITEMS_TABLE_NAME + " " + 
-            "(ORDER_ITEM_ID integer identity (1,1) NOT NULL, " +
-            "ORDER_ID integer NOT NULL, " +
-            "PRODUCT_ID integer NOT NULL, " +
-            "QUANTITY integer NOT NULL, " +
-            "PROD_PRICE decimal(12,2) NOT NULL, " +
-            "PRIMARY KEY (ORDER_ITEM_ID), " +
-            "FOREIGN KEY (ORDER_ID) REFERENCES 3C_ORDERS (ORDER_ID)) ";
+            "(OrderItemID integer identity (1,1) NOT NULL, " +
+            "OrderID integer NOT NULL, " +
+            "ProductID integer NOT NULL, " +
+            "Quantity integer NOT NULL, " +
+            "PRIMARY KEY (OrderItemID), " +
+            "FOREIGN KEY (OrderID) REFERENCES 3C_ORDERS (OrderID)) ";
             stmt = sqlConn.createStatement();
             stmt.executeUpdate(createString);
         } catch (java.sql.SQLException e) {
@@ -63,15 +62,15 @@ public class Items_Table {
 
     
         //Insert Items_Table data
-    public void createItems(int Ord_Item_ID, int Ord_ID, int Prod_ID, int QTY, float Prod_Price) 
+    public void createItems(int Ord_Item_ID, int Ord_ID, int Prod_ID, int QTY) 
         throws TableException{
     
     java.sql.Statement stmt;
         try{
 
           String createString = "SET IDENTITY_INSERT " + ITEMS_TABLE_NAME + " on insert into " + ITEMS_TABLE_NAME + 
-                  " (ORDER_ITEM_ID, ORDER_ID, PRODUCT_ID, QUANTITY, PROD_PRICE ) VALUES(" + Ord_Item_ID + ", "
-                   + Ord_ID + ", " + Prod_ID + ", " + QTY  + "," + Prod_Price + " );" ;
+                  " (OrderItemID, OrderID, ProductID, Quantity ) VALUES(" + Ord_Item_ID + ", "
+                   + Ord_ID + ", " + Prod_ID + ", " + QTY  + " );" ;
           stmt = sqlConn.createStatement();
           stmt.executeUpdate(createString);  
         } catch (java.sql.SQLException e) {
@@ -93,8 +92,8 @@ public class Items_Table {
           rs = stmt.executeQuery(createString);  
           results = new java.util.ArrayList();
             while (rs.next() == true)
-                results.add(new OrderSystem_Classes.OrderItems (rs.getInt("ORDER_ITEM_ID"), rs.getInt("ORDER_ID"), 
-                        rs.getInt("PRODUCT_ID"), rs.getInt("QUANTITY"), rs.getFloat("PROD_PRICE")));  
+                results.add(new OrderSystem_Classes.Items (rs.getInt("Order_Item_ID"), rs.getInt("OrderID"), 
+                        rs.getInt("ProductID"), rs.getInt("Quantity")));  
         }catch (java.sql.SQLException e){
             throw new TableException("Unable to search Item Database." + "\nDetail: " + e);
         }

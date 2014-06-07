@@ -94,8 +94,8 @@ public class DataLoad {
         // Item Table
         try {
             item_order_data.reset();
-            item_order_data.createItems(12, 77777, 7896, 2, 12.99f);
-            item_order_data.createItems(78, 77712, 7589, 6, 10.99f);
+            item_order_data.createItems(12, 77777, 7896, 2);
+            item_order_data.createItems(78, 77712, 7589, 6);
             java.util.ArrayList results  = item_order_data.getAllItems();
             max_index = results.size();
             System.out.println("Items Table:\n");

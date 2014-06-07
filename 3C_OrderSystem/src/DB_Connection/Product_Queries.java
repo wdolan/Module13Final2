@@ -16,8 +16,8 @@ public class Product_Queries {
         }
     }
 
-        // Query to search Products database by PROD_ID
-     public static java.util.ArrayList searchProductsbyProductID(String prodID)
+    
+     public static java.util.ArrayList searchbyProductID(String Product_ID)
             throws TableException{
         int id; String fn; String ln;
         java.sql.Statement stmt;
@@ -26,7 +26,7 @@ public class Product_Queries {
         java.sql.ResultSet rs = null;
         
         try{
-          String createString = "select * from " + Create_Tables.Product_Table.PRODUCT_TABLE_NAME + " where PROD_ID like " + prodID + ";" ;                
+          String createString = "select * from " + Create_Tables.Product_Table.PRODUCT_TABLE_NAME + " where PROD_ID like " + Product_ID + ";" ;                
           stmt = Create_Tables.Product_Table.mysqlConn.createStatement();
           rs = stmt.executeQuery(createString);  
           results = new java.util.ArrayList();
