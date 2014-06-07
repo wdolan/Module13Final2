@@ -297,7 +297,22 @@ public class Menu {
 						break;
 					case '2':
 						System.out.println("How many of this product would you like?");
-						//update quantity of item
+						boolean i = true;
+						while(i == true)
+						{
+							input = brin.readLine();
+							char quant = input.charAt(0);
+							if(quant >= 0 && quant <= 9)
+							{
+								//update quantity of item
+								System.out.println("You now have " + quant + " of this item in your cart.");	
+								i = false;
+							} //end if
+							else
+							{
+								System.out.println("Sorry, invalid entry. Please re-enter the quantity of this item you would like.");
+							} //end else
+						} //end while						
 						break;
 					case 'C':
 						view_cart();
