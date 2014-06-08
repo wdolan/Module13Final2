@@ -30,7 +30,7 @@ public class StockItemsDB {
     
     // Drop 3C_STOCK_ITEMS Table
     
-    public void reset()throws TableException{
+    public static void reset()throws TableException{
         String createString;    
         java.sql.Statement stmt;
         
@@ -58,7 +58,11 @@ public class StockItemsDB {
     }
         
                   //Insert Items data
-    public void createItems(int Prod_ID, String Prod_Name, int Stock_QTY) 
+    /*************************************************************************
+    * needs work! discuss with Amy
+    **************************************************************************/
+    
+    public static void createItems(int Prod_ID, String Prod_Name, int Stock_QTY) 
         throws TableException{
     
     java.sql.Statement stmt;
@@ -80,7 +84,7 @@ public class StockItemsDB {
         java.util.ArrayList results = null;
         java.sql.ResultSet rs = null;
         
-        try{
+       /* try{
           String createString = "select * from " + STOCK_ITEMS_TABLE_NAME + ";" ;                
           stmt = mysqlConn.createStatement();
           rs = stmt.executeQuery(createString);  
@@ -90,11 +94,14 @@ public class StockItemsDB {
                         rs.getInt("STOCK_QTY")));  
         }catch (java.sql.SQLException e){
             throw new TableException("Unable to search Quantity in Stock_Items Table." + "\nDetail: " + e);
-        }
+        } */
         return results;
     }
 
     // Query to search Stock Items Database for current Stock Quantity by PROD_ID
+        /************************************************************
+         * needs to change to return only a single queried item, not an array list
+         ************************************************************/
     public static java.util.ArrayList searchforStockQTY(int prodID)
             throws TableException{
         int id; String fn; String ln;
@@ -103,6 +110,7 @@ public class StockItemsDB {
         java.util.ArrayList results = null;
         java.sql.ResultSet rs = null;
         
+        /*
         try{
           String createString = "select * from " + Create_Tables.StockItemsDB.STOCK_ITEMS_TABLE_NAME + " where PROD_ID " + prodID + ";" ;                
           stmt = Create_Tables.StockItemsDB.mysqlConn.createStatement();
@@ -113,7 +121,7 @@ public class StockItemsDB {
                         rs.getInt("STOCK_QTY")));  
         }catch (java.sql.SQLException e){
             throw new TableException("Unable to search Quantity in Stock_Items Table." + "\nDetail: " + e);
-        }
+        } */
         return results;
     }
 

@@ -29,7 +29,7 @@ public class OrderItemsDB {
     
     // Drop Table
     
-    public void reset()throws TableException{
+    public static void reset()throws TableException{
         String createString;    
         java.sql.Statement stmt;
         
@@ -62,7 +62,7 @@ public class OrderItemsDB {
 
     
         //Insert OrderItemsDB data
-    public void createItems(int Ord_Item_ID, int Ord_ID, int Prod_ID, int QTY, float Prod_Price) 
+    public static void createItems(int Ord_Item_ID, int Ord_ID, int Prod_ID, int QTY, float Prod_Price) 
         throws TableException{
     
     java.sql.Statement stmt;
@@ -92,7 +92,7 @@ public class OrderItemsDB {
           rs = stmt.executeQuery(createString);  
           results = new java.util.ArrayList();
             while (rs.next() == true)
-                results.add(new OrderSystem_Classes.OrderItems (rs.getInt("ORDER_ITEM_ID"), rs.getInt("ORDER_ID"), 
+                results.add(new OrderSystem_Classes.OrderItem (rs.getInt("ORDER_ITEM_ID"), rs.getInt("ORDER_ID"), 
                         rs.getInt("PRODUCT_ID"), rs.getInt("QUANTITY"), rs.getFloat("PROD_PRICE")));  
         }catch (java.sql.SQLException e){
             throw new TableException("Unable to search Item Database." + "\nDetail: " + e);
@@ -116,7 +116,7 @@ public class OrderItemsDB {
           rs = stmt.executeQuery(createString);  
           results = new java.util.ArrayList();
             while (rs.next() == true)
-                results.add(new OrderSystem_Classes.OrderItems (rs.getInt("ORDER_ITEM_ID"), rs.getInt("ORDER_ID"), 
+                results.add(new OrderSystem_Classes.OrderItem (rs.getInt("ORDER_ITEM_ID"), rs.getInt("ORDER_ID"), 
                         rs.getInt("PRODUCT_ID"), rs.getInt("QUANTITY"), rs.getFloat("PROD_PRICE")));  
         }catch (java.sql.SQLException e){
             throw new TableException("Unable to search Item Database." + "\nDetail: " + e);

@@ -32,7 +32,7 @@ public class AddressDB {
     
     // Drop Table
     
-    public void reset()throws TableException{
+    public static void reset()throws TableException{
         String createString;    
         java.sql.Statement stmt;
         
@@ -56,7 +56,7 @@ public class AddressDB {
             "ADDRESS2 varchar(50) NULL, " +
             "CITY varchar(50) NOT NULL, " + 
             "STATE varchar(50) NOT NULL, " + 
-            "ZIP integer NOT NULL, " +
+            "ZIP varchar(10) NOT NULL, " +
             "PRIMARY KEY (ADDRESS_ID), " + 
             "FOREIGN KEY (CUSTOMER_ID) REFERENCES 3C_CUSTOMERS (CUSTOMER_ID)) ";
             stmt = sqlConn.createStatement();
@@ -67,7 +67,7 @@ public class AddressDB {
     }
 
         //Insert AddressDB data
-    public void createAddress(int Addr_ID, int Cust_ID, String Addr_Type,
+    public static void createAddress(int Addr_ID, int Cust_ID, String Addr_Type,
                                         String Addr1, String Addr2, String Addr_City, String Addr_State, int Addr_Zip) 
         throws TableException{
     
@@ -100,9 +100,9 @@ public class AddressDB {
           rs = stmt.executeQuery(createString);  
           results = new java.util.ArrayList();
             while (rs.next() == true)
-                results.add(new OrderSystem_Classes.Address (rs.getInt("ADDRESS_ID"), rs.getInt("CUSTOMER_ID"), 
-                        rs.getString("ADDRESS_TYPE"), rs.getString("ADDRESS1"), rs.getString("ADDRESS2"), 
-                        rs.getString("CITY"), rs.getString("STATE"), rs.getInt("ZIP")));  
+                results.add(new OrderSystem_Classes.Address (rs.getInt("ADDRESS_ID"), rs.getString("ADDRESS1"), 
+                        rs.getString("ADDRESS2"), rs.getString("CITY"), rs.getString("STATE"), 
+                        rs.getString("ZIP")));  
         }catch (java.sql.SQLException e){
             throw new TableException("Unable to search Address Table." + "\nDetail: " + e);
         }
@@ -124,9 +124,8 @@ public class AddressDB {
           rs = stmt.executeQuery(createString);  
           results = new java.util.ArrayList();
             while (rs.next() == true)
-                results.add(new OrderSystem_Classes.Address (rs.getInt("ADDRESS_ID"), rs.getInt("CUSTOMER_ID"), 
-                        rs.getString("ADDRESS_TYPE"), rs.getString("ADDRESS1"), rs.getString("ADDRESS2"), 
-                        rs.getString("CITY"), rs.getString("STATE"), rs.getInt("ZIP")));  
+                results.add(new OrderSystem_Classes.Address (rs.getInt("ADDRESS_ID"), rs.getString("ADDRESS1"), rs.getString("ADDRESS2"), 
+                        rs.getString("CITY"), rs.getString("STATE"), rs.getString("ZIP")));  
         }catch (java.sql.SQLException e){
             throw new TableException("Unable to search Address Table." + "\nDetail: " + e);
         }
