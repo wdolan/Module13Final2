@@ -21,7 +21,7 @@ public class Menu_Item_List {
 
     public Menu_Item_List()
     {
-        sqlConn = Connect.MYSQL.getMSQLConn();
+        sqlConn = DB_Connection.CommonConnection.getMSQLConn();
     }
     
     public static java.util.ArrayList Item_List()

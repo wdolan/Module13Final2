@@ -24,7 +24,7 @@ public class OrdersDB {
     public OrdersDB()
     {
         sql_access = new SQL();
-        sqlConn = Connect.SQL.getSQLConn();
+        sqlConn = DB_Connection.CommonConnection.getSQLConn();
     }
     
     // Drop Table

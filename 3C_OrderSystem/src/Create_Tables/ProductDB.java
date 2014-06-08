@@ -25,7 +25,7 @@ public class ProductDB {
     public ProductDB()
     {
         mysql_access = new MYSQL();
-        mysqlConn = Connect.MYSQL.getMSQLConn();
+        mysqlConn = DB_Connection.CommonConnection.getMSQLConn();
     }
     
    
