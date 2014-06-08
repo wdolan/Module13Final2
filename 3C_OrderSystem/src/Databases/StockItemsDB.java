@@ -2,9 +2,9 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package Create_Tables;
+package Databases;
 
-import DB_Connection.*;
+import Control.CommonConnection;
 
 /**
  *
@@ -24,7 +24,7 @@ public class StockItemsDB {
     public StockItemsDB()
     {
         mysql_access = new CommonConnection();
-        mysqlConn = DB_Connection.CommonConnection.getMSQLConn();
+        mysqlConn = Control.CommonConnection.getMSQLConn();
     }
     
     
@@ -113,8 +113,8 @@ public class StockItemsDB {
         
         
         try{
-          String createString = "select * from " + Create_Tables.StockItemsDB.STOCK_ITEMS_TABLE_NAME + " where PROD_ID " + prodID + ";" ;                
-          stmt = Create_Tables.StockItemsDB.mysqlConn.createStatement();
+          String createString = "select * from " + Databases.StockItemsDB.STOCK_ITEMS_TABLE_NAME + " where PROD_ID " + prodID + ";" ;                
+          stmt = Databases.StockItemsDB.mysqlConn.createStatement();
           rs = stmt.executeQuery(createString);  
           rs.next();
                 results = rs.getInt("STOCK_QTY");  
