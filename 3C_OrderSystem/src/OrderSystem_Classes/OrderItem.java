@@ -33,7 +33,7 @@ public class OrderItem {
 		productName = prodname;
 	} //end constructor
 	 
-	 OrderItem(int orditemID, int ordID, int prodID, int quant, float price)
+	 public OrderItem(int orditemID, int ordID, int prodID, int quant, float price)
 	 {
 		 orderItemID = orditemID;
 		 orderID = ordID;
@@ -124,4 +124,24 @@ public class OrderItem {
 	{
 		itemQuantity = quant;
 	} //end setProductQuant
+	
+	public float getProductPrice()
+	{
+		return unitPrice;
+	} //end getProductPrice
+	
+	public void setProductPrice(float price)
+	{
+		unitPrice = price;
+	} //end setProductPrice
+	
+	public String getProductName()
+	{
+		return productName;
+	} //end getProductName
+	
+	public void setProductName(String name)
+	{
+		productName = name;
+	} //setProductName
 }

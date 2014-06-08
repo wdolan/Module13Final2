@@ -8,7 +8,6 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import Msg_Displays.Menu;
 import OrderSystem_Classes.Order;
-import OrderSystem_Classes.OrderItem;
 /**
  *
  * @author Amy Roberts
@@ -18,11 +17,12 @@ public class main_class
 	public static void main(String[] args)
 	{
 		//variables
+		final int custID = 1;
 		String input;
 		char choice;
 		boolean repeat = true;
 		BufferedReader brin = new BufferedReader(new InputStreamReader(System.in));
-		Order cart = new Order(1);
+		Order cart = new Order(custID);
 		
 		//initialize database connections
 		//initialize tables
