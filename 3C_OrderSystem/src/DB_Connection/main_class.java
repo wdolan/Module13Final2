@@ -4,6 +4,7 @@
  */
 package DB_Connection;
 
+import Create_Tables.AddressDB;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import OrderSystem_Classes.Order;
@@ -13,7 +14,7 @@ import OrderSystem_Classes.Order;
  */
 public class main_class 
 {
-	public static void main(String[] args)
+	public static void main(String[] args) throws AddressDB.TableException
 	{
 		//variables
 		final int custID = 1;
@@ -30,7 +31,6 @@ public class main_class
 		//display main menu
 		System.out.println("Welcome to the store, James!\n");
 		Menu.main_menu();
-		
 		//take user input and switch based on choice
 		try
 		{
