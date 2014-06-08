@@ -24,7 +24,7 @@ public class StockItemsDB {
     public StockItemsDB()
     {
         mysql_access = new MYSQL();
-        mysqlConn = Connect.MYSQL.getMSQLConn();
+        mysqlConn = DB_Connection.CommonConnection.getMSQLConn();
     }
     
     

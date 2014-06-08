@@ -26,7 +26,8 @@ public class AddressDB {
     public AddressDB()
     {
         sql_access = new SQL();
-        sqlConn = Connect.SQL.getSQLConn();
+        sqlConn = DB_Connection.CommonConnection.getSQLConn();
+                
     }
     
     // Drop Table
