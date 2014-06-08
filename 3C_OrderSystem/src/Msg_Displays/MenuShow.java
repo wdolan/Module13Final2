@@ -3,9 +3,9 @@
  * and open the template in the editor.
  */
 package Msg_Displays;
-import Create_Tables.Address_Table;
-import Create_Tables.Items_Table;
-import Create_Tables.Orders_Table;
+import Create_Tables.AddressDB;
+import Create_Tables.OrderItemsDB;
+import Create_Tables.OrdersDB;
 import DB_Connection.*;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -25,7 +25,7 @@ public MenuShow()
     
 }
 
-public void MenuRun() throws Address_Table.TableException, Orders_Table.TableException, Items_Table.TableException
+public void MenuRun() throws AddressDB.TableException, OrdersDB.TableException, OrderItemsDB.TableException
 {
     data_load = new DataLoad();
     data_load.load_data();

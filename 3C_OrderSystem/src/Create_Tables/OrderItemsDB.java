@@ -5,13 +5,12 @@
 package Create_Tables;
 
 import Connect.*;
-import DB_Connection.Item_Queries;
 
 /**
  *
  * @author Bella Belova
  */
-public class Items_Table {
+public class OrderItemsDB {
     
     public static final String ITEMS_TABLE_NAME = "3C_ITEMS";   
     public static java.sql.Connection sqlConn;
@@ -22,7 +21,7 @@ public class Items_Table {
         }
     }
     
-    public Items_Table()
+    public OrderItemsDB()
     {
         sql_access = new SQL();
         sqlConn = Connect.SQL.getSQLConn();
@@ -44,15 +43,16 @@ public class Items_Table {
         }
         
         try{
-            //Create the Items_Table Table
+            //Create the OrderItemsDB Table
             createString =
             "create table " + ITEMS_TABLE_NAME + " " + 
-            "(OrderItemID integer identity (1,1) NOT NULL, " +
-            "OrderID integer NOT NULL, " +
-            "ProductID integer NOT NULL, " +
-            "Quantity integer NOT NULL, " +
-            "PRIMARY KEY (OrderItemID), " +
-            "FOREIGN KEY (OrderID) REFERENCES 3C_ORDERS (OrderID)) ";
+            "(ORDER_ITEM_ID integer identity (1,1) NOT NULL, " +
+            "ORDER_ID integer NOT NULL, " +
+            "PRODUCT_ID integer NOT NULL, " +
+            "QUANTITY integer NOT NULL, " +
+            "PROD_PRICE decimal(12,2) NOT NULL, " +
+            "PRIMARY KEY (ORDER_ITEM_ID), " +
+            "FOREIGN KEY (ORDER_ID) REFERENCES 3C_ORDERS (ORDER_ID)) ";
             stmt = sqlConn.createStatement();
             stmt.executeUpdate(createString);
         } catch (java.sql.SQLException e) {
@@ -61,16 +61,16 @@ public class Items_Table {
     }
 
     
-        //Insert Items_Table data
-    public void createItems(int Ord_Item_ID, int Ord_ID, int Prod_ID, int QTY) 
+        //Insert OrderItemsDB data
+    public void createItems(int Ord_Item_ID, int Ord_ID, int Prod_ID, int QTY, float Prod_Price) 
         throws TableException{
     
     java.sql.Statement stmt;
         try{
 
           String createString = "SET IDENTITY_INSERT " + ITEMS_TABLE_NAME + " on insert into " + ITEMS_TABLE_NAME + 
-                  " (OrderItemID, OrderID, ProductID, Quantity ) VALUES(" + Ord_Item_ID + ", "
-                   + Ord_ID + ", " + Prod_ID + ", " + QTY  + " );" ;
+                  " (ORDER_ITEM_ID, ORDER_ID, PRODUCT_ID, QUANTITY, PROD_PRICE ) VALUES(" + Ord_Item_ID + ", "
+                   + Ord_ID + ", " + Prod_ID + ", " + QTY  + "," + Prod_Price + " );" ;
           stmt = sqlConn.createStatement();
           stmt.executeUpdate(createString);  
         } catch (java.sql.SQLException e) {
@@ -79,7 +79,7 @@ public class Items_Table {
     }
     
         public static java.util.ArrayList getAllItems()
-            throws Item_Queries.TableException, TableException{
+            throws OrderItemsDB.TableException, TableException{
         int id; String fn; String ln;
         java.sql.Statement stmt;
         Object p = null;
@@ -92,8 +92,8 @@ public class Items_Table {
           rs = stmt.executeQuery(createString);  
           results = new java.util.ArrayList();
             while (rs.next() == true)
-                results.add(new OrderSystem_Classes.Items (rs.getInt("Order_Item_ID"), rs.getInt("OrderID"), 
-                        rs.getInt("ProductID"), rs.getInt("Quantity")));  
+                results.add(new OrderSystem_Classes.OrderItems (rs.getInt("ORDER_ITEM_ID"), rs.getInt("ORDER_ID"), 
+                        rs.getInt("PRODUCT_ID"), rs.getInt("QUANTITY"), rs.getFloat("PROD_PRICE")));  
         }catch (java.sql.SQLException e){
             throw new TableException("Unable to search Item Database." + "\nDetail: " + e);
         }
@@ -101,6 +101,31 @@ public class Items_Table {
     
         }
 
+    // Query to search for Items by ITEM_ID
+    public static java.util.ArrayList searchItemsbyItemID(int itemID)
+            throws TableException{
+        int id; String fn; String ln;
+        java.sql.Statement stmt;
+        Object p = null;
+        java.util.ArrayList results = null;
+        java.sql.ResultSet rs = null;
+        
+        try{
+          String createString = "select * from " + Create_Tables.OrderItemsDB.ITEMS_TABLE_NAME + " where ORDER_ITEM_ID like " + itemID + ";" ;                
+          stmt = Create_Tables.OrderItemsDB.sqlConn.createStatement();
+          rs = stmt.executeQuery(createString);  
+          results = new java.util.ArrayList();
+            while (rs.next() == true)
+                results.add(new OrderSystem_Classes.OrderItems (rs.getInt("ORDER_ITEM_ID"), rs.getInt("ORDER_ID"), 
+                        rs.getInt("PRODUCT_ID"), rs.getInt("QUANTITY"), rs.getFloat("PROD_PRICE")));  
+        }catch (java.sql.SQLException e){
+            throw new TableException("Unable to search Item Database." + "\nDetail: " + e);
+        }
+        return results;
+    
+        }
+        
+        
 }
 
 
