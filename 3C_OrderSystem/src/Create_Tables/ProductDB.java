@@ -79,7 +79,7 @@ public class ProductDB {
         }
     }
     
-        public  java.util.ArrayList getAllProducts()
+        public static java.util.ArrayList getAllProducts()
             throws ProductDB.TableException, TableException{
         int id; String fn; String ln;
         java.sql.Statement stmt;

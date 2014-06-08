@@ -99,4 +99,39 @@ public class Order {
 		} //end for		
 	} //end removeOrderItem
 	
+	public void changeQuantity(int prodID, int quant)
+	{
+		OrderItem temp;
+		int test = 0;
+		
+		//iterate through list and compare product ID of each item against the parameter,
+		//then update the quantity of the one that matches
+		for (int x = 0; x < orderItemList.size(); x++)
+		{
+			temp = orderItemList.get(x);
+			test = temp.getProductID();
+			if (test == prodID)
+			{
+				temp.setProductQuant(quant);
+			} //end if
+		} //end for
+			
+	} //end changeQuantity
+	
+	public float calcOrderTotal()
+	{
+		OrderItem temp;
+		float total = 0;
+		
+		//iterate through list and get quantity and unit price of each item
+		//then multiply together and add to running total
+		for (int x = 0; x < orderItemList.size(); x++)
+		{
+			temp = orderItemList.get(x);
+			total = total + (temp.getProductQuant() * temp.getProductPrice());
+		}
+		
+		return total;
+	} //end calcOrderTotal
+	
 } //end class

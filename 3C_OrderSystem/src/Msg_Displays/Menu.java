@@ -10,6 +10,7 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import OrderSystem_Classes.Order;
 import OrderSystem_Classes.OrderItem;
+import java.util.ArrayList;
 
 /**
  *
@@ -49,9 +50,7 @@ public class Menu {
 		cart = current_cart;
 		System.out.println("Full catalog:");
 		
-		//get all products
-		//display all products
-		//probably want an array of product objects for this
+		ArrayList<OrderItem> allProducts = Create_Tables.ProductDB.getAllProducts();
 		
 		System.out.println("M. Main menu");
 		System.out.println("X. Exit program\n");
@@ -201,11 +200,31 @@ public class Menu {
 		returntomain = false;
 		boolean cart_empty = false;
 		cart = current_cart;
-		System.out.println("Your cart:");
+		System.out.println("Your cart:\n");
 		
-		//display current cart, or "Your cart is empty" message
-		//cart_empty = true if cart is empty
+		//copy arraylist out of cart for use
+		ArrayList<OrderItem> orderItemList = cart.getOrderItems();
 		
+		//set cart_empty flag and present appropriate message if cart is empty
+		if (0 == orderItemList.size())
+		{
+			System.out.println("Your cart is empty!\n");
+			cart_empty = true;
+		} //end if
+		else
+		{
+			System.out.println("Product name - product quantity - price per unit - total price");
+				
+			for(int x = 0; x < orderItemList.size(); x++)
+			{
+				OrderItem temp = orderItemList.get(x);
+				System.out.println((x + 1) + ". " + temp.getProductName() + " - " + temp.getProductQuant() + 
+						  " - $" + temp.getProductPrice() + " - $" + (temp.getProductQuant() * temp.getProductPrice()));
+			} //end for
+			
+		} //end else
+				
+		System.out.println("Current total: $" + cart.calcOrderTotal());
 		System.out.println("P. Place order");
 		System.out.println("M. Main menu");
 		System.out.println("X. Exit program\n");
@@ -303,7 +322,7 @@ public class Menu {
 				{
 					case '1':
 						//remove product from array
-						//cart.removeItem(itemID);
+						//cart.removeOrderItem(prodID);
 						System.out.println("This item has been removed from your cart.");
 						break;
 					case '2':
@@ -316,7 +335,7 @@ public class Menu {
 							if(quant >= 0 && quant <= 9)
 							{
 								//update quantity of item
-								//cart.updateQuantity(itemID, quant);
+								//cart.changeQuantity(prodID, quant);
 								System.out.println("You now have " + quant + " of this item in your cart.");	
 								i = false;
 							} //end if
@@ -367,9 +386,29 @@ public class Menu {
 		cart = current_cart;
 		System.out.println("Place order:");
 		
-		//display current cart or empty cart
-		//set empty_cart flag if cart is empty
+		//copy arraylist out of cart for use
+		ArrayList<OrderItem> orderItemList = cart.getOrderItems();
 		
+		//set cart_empty flag and present appropriate message if cart is empty
+		if (0 == orderItemList.size())
+		{
+			System.out.println("Your cart is empty!\n");
+			cart_empty = true;
+		} //end if
+		else
+		{
+			System.out.println("Product name - product quantity - price per unit - total price");
+				
+			for(int x = 0; x < orderItemList.size(); x++)
+			{
+				OrderItem temp = orderItemList.get(x);
+				System.out.println((x + 1) + ". " + temp.getProductName() + " - " + temp.getProductQuant() + 
+						  " - $" + temp.getProductPrice() + " - $" + (temp.getProductQuant() * temp.getProductPrice()));
+			} //end for
+			
+		} //end else
+		
+		System.out.println("Current total: $" + cart.calcOrderTotal());
 		System.out.println("1. Make changes to this order");
 		System.out.println("2. Place this order");
 		System.out.println("M. Main menu");
