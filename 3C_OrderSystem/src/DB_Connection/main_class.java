@@ -4,23 +4,71 @@
  */
 package DB_Connection;
 
-import Create_Tables.Address_Table;
-import Create_Tables.Items_Table;
-import Create_Tables.Orders_Table;
-import java.io.IOException;
-import Msg_Displays.*;
-
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import Msg_Displays.Menu;
+import OrderSystem_Classes.Order;
+import OrderSystem_Classes.OrderItem;
 /**
  *
- * @author Bella Belova
+ * @author Amy Roberts
  */
-public class main_class {
-
-    public static void main(String[] argv) throws IOException, Address_Table.TableException, Orders_Table.TableException, Items_Table.TableException
-    {
-        MenuShow main_menu;
-        main_menu = new MenuShow();
-        main_menu.MenuRun();
-        
-    }
-}
+public class main_class 
+{
+	public static void main(String[] args)
+	{
+		//variables
+		String input;
+		char choice;
+		boolean repeat = true;
+		BufferedReader brin = new BufferedReader(new InputStreamReader(System.in));
+		Order cart = new Order(1);
+		
+		//initialize database connections
+		//initialize tables
+		//load data to tables
+		
+		//display main menu
+		System.out.println("Welcome to the store, James!\n");
+		Menu.main_menu();
+		
+		//take user input and switch based on choice
+		try
+		{
+			while(repeat = true)
+			{
+				input = brin.readLine();
+				input = input.toUpperCase();
+				choice = input.charAt(0);
+				
+				System.out.println(choice);
+				switch(choice)
+				{
+					case '1':
+						Menu.browse_catalog(cart);
+						break;
+					case '2':
+						Menu.view_cart(cart);
+						break;
+					case '3':
+						Menu.place_order(cart);
+						break;
+					case 'X':
+						System.out.println("Goodbye! Thank you for shopping with us!");
+						repeat = false;
+						System.exit(0);
+						break;
+					default:
+						System.out.println("Sorry, invalid selection. Please select an option from the menu above: ");
+						break;
+				} //end switch
+			} //end while loop
+		} //end try
+		catch (Exception e)
+		{
+			System.err.println("Error: " + e);
+		} //end catch
+		
+		
+	} //end main
+} //end class

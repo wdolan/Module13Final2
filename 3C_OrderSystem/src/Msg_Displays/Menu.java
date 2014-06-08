@@ -162,6 +162,7 @@ public class Menu {
 					default:
 						if(choice >= '0' && choice <= '9')
 						{
+							//extract prodID, price, prodname from array of product items
 							//OrderItem item = new OrderItem(prodID, choice, price, prodname);
 							//cart.addOrderItem(item);
 							
@@ -226,7 +227,8 @@ public class Menu {
 				{
 					case '1':
 						//pull data from array and pass to modify_cart_item
-						//modify_cart_item(id);
+						//use productID to pass to modify in case they want to remove
+						//modify_cart_item(productid);
 						break;
 					case 'P':
 						//confirm the cart is not empty before calling place_order
@@ -272,7 +274,7 @@ public class Menu {
 	 * Presents options which allow modifying the quantity of an ordered item or removing it from the cart.
 	 * @param orderItemID 
 	 */
-	public static void modify_cart_item(Order current_cart, int orderItemID)
+	public static void modify_cart_item(Order current_cart, int productID)
 	{
 		returntomain = false;
 		cart = current_cart;
@@ -301,6 +303,7 @@ public class Menu {
 				{
 					case '1':
 						//remove product from array
+						//cart.removeItem(itemID);
 						System.out.println("This item has been removed from your cart.");
 						break;
 					case '2':
@@ -313,6 +316,7 @@ public class Menu {
 							if(quant >= 0 && quant <= 9)
 							{
 								//update quantity of item
+								//cart.updateQuantity(itemID, quant);
 								System.out.println("You now have " + quant + " of this item in your cart.");	
 								i = false;
 							} //end if
