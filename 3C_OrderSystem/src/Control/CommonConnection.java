@@ -16,56 +16,37 @@ public class CommonConnection {
     private static final String MYSQLpassword = "testDB1234!";
     private static java.sql.Connection mysqlConn;
     
-    private static java.sql.Connection sqlConn = null;
+    private static java.sql.Connection sqlConn;
     private static final String SQLjdbcDriver = "com.microsoft.sqlserver.jdbc.SQLServerDriver"; 
     private static final String SQLconnectionUrl = "jdbc:sqlserver://localhost";
     private static final String SQLusername = "sa";
     private static final String SQLpassword = "password";
-
-    private static java.sql.Connection dbCon = null;
     
-    
-    
-    public static void initialize_Connection_MYSQL()
-    {
-        try{
-            Class.forName(MYSQLjdbcDriver);
-            
-            try{
-                dbCon = java.sql.DriverManager.getConnection(MYSQLconnectionUrl,MYSQLusername, MYSQLpassword);                
-            } catch (java.sql.SQLException e){System.err.println(e); }
-        }catch(ClassNotFoundException e){
-            System.err.println(e);
-        }
-    }
-    
-    public static void initialize_Connection_SQL() 
-    {      
-        try{
-            Class.forName(SQLjdbcDriver);
-            
-            try{
-                dbCon = java.sql.DriverManager.getConnection(SQLconnectionUrl,SQLusername, SQLpassword);
-            } catch (java.sql.SQLException e){System.err.println(e); }
-        }catch(ClassNotFoundException e){
-            System.err.println(e);
-        }
-    }
-
-    
-    
-
-    
-    public  static  java.sql.Connection getSQLConn()
+    /**
+     * Function that returns out the open SQL connection for other DB operation calls.
+     * 
+     * @return The open sqlConn
+     */
+        public  static  java.sql.Connection getSQLConn()
     {
         return sqlConn;
     }
 
-    public static java.sql.Connection getMSQLConn()
+    /**
+     * Function that returns out the open SQL connection for other DB operation calls.
+     * 
+     * @return The open mysqlConn
+     */
+        public static java.sql.Connection getMSQLConn()
     {
         return mysqlConn;
     }
-    
+
+    /**
+     * Function that will open and starts the MySQL connecion
+     * 
+     * @return - ignore - Not actually used at this point
+     */
         public static java.sql.Connection iniMYSQL()
     {
             
@@ -76,14 +57,21 @@ public class CommonConnection {
         return mysqlConn;
         
     }
-        
-    public static void iniSQL() 
+    
+ /**
+     * Function that will open and starts the SQL connecion
+     * 
+     * @return - ignore - Not actually used at this point
+     */
+    public static java.sql.Connection iniSQL() 
     {      
-       try{
-                sqlConn = java.sql.DriverManager.getConnection(SQLconnectionUrl,SQLusername, SQLpassword);
-            } catch (java.sql.SQLException e){System.err.println(e); }
+       try
+       {
+            sqlConn = java.sql.DriverManager.getConnection(SQLconnectionUrl,SQLusername, SQLpassword);
+       } 
+       catch (java.sql.SQLException e){System.err.println(e); }
        
-        //return sqlConn;
+        return sqlConn;
         
     }
 
