@@ -65,6 +65,28 @@ public class CommonConnection {
     {
         return mysqlConn;
     }
+    
+        public static java.sql.Connection iniMYSQL()
+    {
+            
+            try{
+                mysqlConn = java.sql.DriverManager.getConnection(MYSQLconnectionUrl,MYSQLusername, MYSQLpassword);                
+            } catch (java.sql.SQLException e){System.err.println(e); }
+            
+        return mysqlConn;
+        
+    }
+        
+    public static void iniSQL() 
+    {      
+       try{
+                sqlConn = java.sql.DriverManager.getConnection(SQLconnectionUrl,SQLusername, SQLpassword);
+            } catch (java.sql.SQLException e){System.err.println(e); }
+       
+        //return sqlConn;
+        
+    }
+
 
     
 }
