@@ -4,7 +4,7 @@
  */
 package Create_Tables;
 
-import Connect.*;
+import DB_Connection.*;
 
 /**
  *
@@ -14,7 +14,7 @@ public class OrderItemsDB {
     
     public static final String ITEMS_TABLE_NAME = "3C_ITEMS";   
     public static java.sql.Connection sqlConn;
-    SQL sql_access;
+    CommonConnection sql_access;
     public static class TableException extends Exception{
         TableException(String s){
             super(s);
@@ -23,7 +23,7 @@ public class OrderItemsDB {
     
     public OrderItemsDB()
     {
-        sql_access = new SQL();
+        sql_access = new CommonConnection();
         sqlConn = DB_Connection.CommonConnection.getSQLConn();
     }
     

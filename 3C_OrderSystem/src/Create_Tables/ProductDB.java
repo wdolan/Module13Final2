@@ -4,7 +4,7 @@
  */
 package Create_Tables;
 
-import Connect.*;
+import DB_Connection.*;
 
 
 /**
@@ -15,7 +15,7 @@ public class ProductDB {
     
     public static final String PRODUCT_TABLE_NAME = "3C_PRODUCTS";
     public static java.sql.Connection mysqlConn;
-    MYSQL mysql_access;    
+    CommonConnection mysql_access;    
     public static class TableException extends Exception{
         TableException(String s){
             super(s);
@@ -24,7 +24,7 @@ public class ProductDB {
     
     public ProductDB()
     {
-        mysql_access = new MYSQL();
+        mysql_access = new CommonConnection();
         mysqlConn = DB_Connection.CommonConnection.getMSQLConn();
     }
     

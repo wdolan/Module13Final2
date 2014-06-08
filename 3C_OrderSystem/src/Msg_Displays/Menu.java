@@ -6,6 +6,7 @@
 
 package Msg_Displays;
 
+import Create_Tables.AddressDB;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import OrderSystem_Classes.Order;
@@ -31,8 +32,8 @@ public class Menu {
 	/**
 	 * Presents the main menu options.
 	 */
-	public static void main_menu()
-	{
+	public static void main_menu() 
+        {
 		System.out.println("Main menu:");
 		System.out.println("1. Browse catalog");
 		System.out.println("2. View shopping cart");
@@ -50,7 +51,7 @@ public class Menu {
 		cart = current_cart;
 		System.out.println("Full catalog:");
 		
-		ArrayList<OrderItem> allProducts = Create_Tables.ProductDB.getAllProducts();
+//		ArrayList<OrderItem> allProducts = Create_Tables.ProductDB.getAllProducts();
 		
 		System.out.println("M. Main menu");
 		System.out.println("X. Exit program\n");

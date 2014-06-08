@@ -6,7 +6,7 @@ package Create_Tables;
 
 import static Create_Tables.AddressDB.ADDRESS_TABLE_NAME;
 import static Create_Tables.AddressDB.sqlConn;
-import  Connect.*;
+import  DB_Connection.*;
 
 
 /**
@@ -17,7 +17,7 @@ public class CustomerDB {
     
     public static final String CUSTOMER_TABLE_NAME = "3C_CUSTOMERS";
     public static java.sql.Connection sqlConn;
-    SQL sql_access;
+    CommonConnection sql_access;
     public static class TableException extends Exception{
         TableException(String s){
             super(s);
@@ -26,7 +26,7 @@ public class CustomerDB {
     
     public CustomerDB()
     {
-        sql_access = new SQL();
+        sql_access = new CommonConnection();
         sqlConn = DB_Connection.CommonConnection.getSQLConn();
     }
     // Drop Table

@@ -51,6 +51,10 @@ public class CommonConnection {
             System.err.println(e);
         }
     }
+
+    
+    
+
     
     public  static  java.sql.Connection getSQLConn()
     {
