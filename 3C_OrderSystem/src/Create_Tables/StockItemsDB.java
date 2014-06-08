@@ -29,7 +29,6 @@ public class StockItemsDB {
     
     
     // Drop 3C_STOCK_ITEMS Table
-    
     public static void reset()throws TableException{
         String createString;    
         java.sql.Statement stmt;
@@ -98,7 +97,12 @@ public class StockItemsDB {
         return results;
     }
 
-    // Query to search Stock Items Database for current Stock Quantity by PROD_ID
+        /**
+         * Query to search Stock Items Database for current Stock Quantity by PROD_ID.
+         * @param prodID The product identification number
+         * @return Number of units in stock for item
+         * @throws Create_Tables.StockItemsDB.TableException 
+         */
     public static int searchforStockQTY(int prodID)
             throws TableException{
         int id; String fn; String ln;

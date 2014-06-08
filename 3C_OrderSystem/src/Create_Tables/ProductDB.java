@@ -5,6 +5,7 @@
 package Create_Tables;
 
 import Connect.*;
+import OrderSystem_Classes.Product;
 
 
 /**
@@ -101,7 +102,12 @@ public class ProductDB {
         return results;        
     }
         
-    // Query to search for and return a single product from PRODUCT table    
+        /**
+         * Query to search for and return a single product from PRODUCT table.
+         * @param prodID Product identification code
+         * @return A Product Name from the PRODUCT table
+         * @throws Create_Tables.ProductDB.TableException 
+         */
     public static String searchforProductbyID(int prodID)
             throws TableException{
         int id; String fn; String ln;
@@ -122,6 +128,36 @@ public class ProductDB {
         } 
         return results;
     }
+     
+    /**
+     * search PRODUCT database by prodID, return Product object.
+     * @param prodID Product identification number
+     * @return A Product Object with all column/row data
+     * @throws Create_Tables.ProductDB.TableException 
+     */
+    public static Product getProductbyID(int prodID)
+            throws TableException{
+        int id; String fn; String ln;
+        java.sql.Statement stmt;
+        Object p = null;
+        Product results;
+        java.sql.ResultSet rs = null;
+        
+        
+        try{
+          String createString = "select * from " + Create_Tables.ProductDB.PRODUCT_TABLE_NAME + " where PROD_ID " + prodID + ";" ;                
+          stmt = Create_Tables.StockItemsDB.mysqlConn.createStatement();
+          rs = stmt.executeQuery(createString);  
+          rs.next();
+          results = new OrderSystem_Classes.Product (rs.getInt("PROD_ID"), rs.getInt("CATEGORY_ID"), 
+                        rs.getString("PROD_NAME"), rs.getString("PROD_DESC"), rs.getFloat("PROD_PRICE"));  
+        }catch (java.sql.SQLException e){
+            throw new TableException("Unable to create requested Product object." + "\nDetail: " + e);
+        } 
+        return results;
+    }    
+    
+    
 
         // Query to search Products database by PROD_ID & return Array List of Products
      public static java.util.ArrayList searchProductsbyProductID(String prodID)
