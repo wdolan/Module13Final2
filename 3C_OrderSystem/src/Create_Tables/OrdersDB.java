@@ -29,7 +29,7 @@ public class OrdersDB {
     
     // Drop Table
     
-    public void reset()throws TableException{
+    public static void reset()throws TableException{
         String createString;    
         java.sql.Statement stmt;
         
@@ -60,7 +60,7 @@ public class OrdersDB {
     }
 
             //Insert Order data
-    public void createOrder(int Ord_ID, int Cust_ID, String Fin, String Ord_Date, float Ord_Total) 
+    public static void createOrder(int Ord_ID, int Cust_ID, String Fin, String Ord_Date, float Ord_Total) 
         throws TableException{
     
     java.sql.Statement stmt;
@@ -83,18 +83,18 @@ public class OrdersDB {
         Object p = null;
         java.util.ArrayList results = null;
         java.sql.ResultSet rs = null;
-        
+        /*
         try{
           String createString = "select * from " + ORDERS_TABLE_NAME + ";" ;                
           stmt = sqlConn.createStatement();
           rs = stmt.executeQuery(createString);  
           results = new java.util.ArrayList();
             while (rs.next() == true)
-                results.add(new OrderSystem_Classes.Orders (rs.getInt("ORDER_ID"), rs.getInt("CUSTOMER_ID"), 
+                results.add(new OrderSystem_Classes.Order (rs.getInt("ORDER_ID"), rs.getInt("CUSTOMER_ID"), 
                         rs.getString("FINANCIAL"), rs.getString("ORDER_DATE"), rs.getFloat("ORDER_TOTAL")));  
         }catch (java.sql.SQLException e){
             throw new TableException("Unable to search Order Database." + "\nDetail: " + e);
-        }
+        }*/
         return results;
     }  
         
@@ -106,18 +106,18 @@ public class OrdersDB {
         Object p = null;
         java.util.ArrayList results = null;
         java.sql.ResultSet rs = null;
-        
+        /*
         try{
           String createString = "select * from " + Create_Tables.OrdersDB.ORDERS_TABLE_NAME + " where ORDER_ID like " + orderID + ";" ;                
           stmt = Create_Tables.OrdersDB.sqlConn.createStatement();
           rs = stmt.executeQuery(createString);  
           results = new java.util.ArrayList();
             while (rs.next() == true)
-                results.add(new OrderSystem_Classes.Orders (rs.getInt("ORDER_ID"), rs.getInt("CUSTOMER_ID"), 
+                results.add(new OrderSystem_Classes.Order (rs.getInt("ORDER_ID"), rs.getInt("CUSTOMER_ID"), 
                         rs.getString("FINANCIAL"), rs.getString("ORDER_DATE"), rs.getFloat("ORDER_TOTAL")));  
         }catch (java.sql.SQLException e){
             throw new TableException("Unable to search Order Database." + "\nDetail: " + e);
-        }
+        } */
         return results;
     }
 

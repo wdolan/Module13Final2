@@ -33,7 +33,9 @@ public class OrderItem {
 		productName = prodname;
 	} //end constructor
 	 
+
 	 public OrderItem(int orditemID, int ordID, int prodID, int quant, float price)
+
 	 {
 		 orderItemID = orditemID;
 		 orderID = ordID;
