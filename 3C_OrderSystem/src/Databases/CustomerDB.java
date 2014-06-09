@@ -15,16 +15,16 @@ import static Databases.AddressDB.sqlConn;
  */
 public class CustomerDB {
     
-    public static final String CUSTOMER_TABLE_NAME = "3C_CUSTOMERS";
+    public static final String CUSTOMER_TABLE_NAME = "THREEC_CUSTOMERS";
     public static java.sql.Connection sqlConn;
-    CommonConnection sql_access;
+    public static CommonConnection sql_access;
     public static class TableException extends Exception{
         TableException(String s){
             super(s);
         }
     }
     
-    public CustomerDB()
+    public static void CustomerDB()
     {
         sql_access = new CommonConnection();
         sqlConn = Control.CommonConnection.getSQLConn();

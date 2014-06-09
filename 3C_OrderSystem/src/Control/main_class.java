@@ -29,6 +29,22 @@ public class main_class
 		//load data to tables
 		
 		//display main menu
+                System.out.println("Testing Connection Data Here:::\n");
+               // Connection sqlConn = null;
+                CommonConnection.iniSQL();
+                Databases.CustomerDB.CustomerDB();
+                try{
+                    Databases.CustomerDB.reset();
+                }
+                catch (Databases.CustomerDB.TableException s)
+                {
+                    System.err.println("Error: " + s);
+                }
+                Databases.AddressDB.AddressDB();
+                Databases.AddressDB.reset();
+                System.out.println("Done testing connections.\n");
+                System.out.println("Hopefully no errors to this point.\n");
+                System.out.println("(Crossing fingers)\n");
 		System.out.println("Welcome to the store, James!\n");
 		Menu.main_menu();
 		//take user input and switch based on choice

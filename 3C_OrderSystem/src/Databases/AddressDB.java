@@ -14,16 +14,16 @@ import Control.CommonConnection;
  */
 public class AddressDB {
     
-    public static final String ADDRESS_TABLE_NAME = "3C_ADDRESS";  
+    public static final String ADDRESS_TABLE_NAME = "THREEC_ADDRESS";  
     public static java.sql.Connection sqlConn;
-    Control.CommonConnection sql_access;
+    public static Control.CommonConnection sql_access;
     public static class TableException extends Exception{
         TableException(String s){
             super(s);
         }
     }
     
-    public AddressDB()
+    public static void AddressDB()
     {
         sql_access = new CommonConnection();
         sqlConn = Control.CommonConnection.getSQLConn();
@@ -58,7 +58,7 @@ public class AddressDB {
             "STATE varchar(50) NOT NULL, " + 
             "ZIP varchar(10) NOT NULL, " +
             "PRIMARY KEY (ADDRESS_ID), " + 
-            "FOREIGN KEY (CUSTOMER_ID) REFERENCES 3C_CUSTOMERS (CUSTOMER_ID)) ";
+            "FOREIGN KEY (CUSTOMER_ID) REFERENCES " + CustomerDB.CUSTOMER_TABLE_NAME + " (CUSTOMER_ID)) ";
             stmt = sqlConn.createStatement();
             stmt.executeUpdate(createString);
         } catch (java.sql.SQLException e) {

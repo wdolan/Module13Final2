@@ -176,7 +176,7 @@ public class Menu {
 		cart = current_cart;
 		System.out.println("Product details:\n");
 		
-		Product currentproduct = Databases.ProductDB.getProductbyID(prodID);
+		//Product currentproduct = Databases.ProductDB.getProductbyID(prodID);
 		
 		
 		//reformat and display full product details

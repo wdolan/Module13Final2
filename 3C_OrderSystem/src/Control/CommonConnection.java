@@ -47,7 +47,7 @@ public class CommonConnection {
      * 
      * @return - ignore - Not actually used at this point
      */
-        public static java.sql.Connection iniMYSQL()
+    public static java.sql.Connection iniMYSQL()
     {
             
             try{
