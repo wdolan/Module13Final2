@@ -43,7 +43,7 @@ public class CommonConnection {
     }
 
     /**
-     * Function that will open and starts the MySQL connecion
+     * Function that will open and starts the MySQL connection
      * 
      * @return - ignore - Not actually used at this point
      */
