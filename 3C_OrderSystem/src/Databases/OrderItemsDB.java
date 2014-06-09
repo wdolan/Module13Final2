@@ -21,9 +21,9 @@ public class OrderItemsDB {
         }
     }
     
-    public OrderItemsDB()
+    public static void OrderItemsDB()
     {
-        sql_access = new CommonConnection();
+        //sql_access = new CommonConnection();
         sqlConn = Control.CommonConnection.getSQLConn();
     }
     
@@ -56,7 +56,7 @@ public class OrderItemsDB {
             stmt = sqlConn.createStatement();
             stmt.executeUpdate(createString);
         } catch (java.sql.SQLException e) {
-            throw new TableException("Unable to create " + ITEMS_TABLE_NAME + "\nDetail: " + e);
+            throw new TableException("Unable to create " + ITEMS_TABLE_NAME + " ma\nDetail: " + e);
         }        
     }
 
