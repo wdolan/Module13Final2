@@ -16,16 +16,16 @@ public class ProductDB {
     
     public static final String PRODUCT_TABLE_NAME = "C_PRODUCTS";
     public static java.sql.Connection mysqlConn;
-    CommonConnection mysql_access;    
+    //CommonConnection mysql_access;    
     public static class TableException extends Exception{
         TableException(String s){
             super(s);
         }
     }
     
-    public ProductDB()
+    public static void ProductDB()
     {
-        mysql_access = new CommonConnection();
+     //   mysql_access = new CommonConnection();
         mysqlConn = Control.CommonConnection.getMSQLConn();
     }
     
