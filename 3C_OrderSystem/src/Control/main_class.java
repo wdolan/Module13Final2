@@ -32,6 +32,8 @@ public class main_class
                 System.out.println("Testing Connection Data Here:::\n");
                // Connection sqlConn = null;
                 CommonConnection.iniSQL();
+                Databases.AddressDB.AddressDB();
+                Databases.AddressDB.reset();
                 Databases.CustomerDB.CustomerDB();
                 try{
                     Databases.CustomerDB.reset();
@@ -40,8 +42,6 @@ public class main_class
                 {
                     System.err.println("Error: " + s);
                 }
-                Databases.AddressDB.AddressDB();
-                Databases.AddressDB.reset();
                 System.out.println("Done testing connections.\n");
                 System.out.println("Hopefully no errors to this point.\n");
                 System.out.println("(Crossing fingers)\n");
