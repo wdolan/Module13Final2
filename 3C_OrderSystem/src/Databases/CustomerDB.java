@@ -22,9 +22,9 @@ public class CustomerDB {
         }
     }
     
-    public CustomerDB()
+    public static void CustomerDB()
     {
-        sql_access = new CommonConnection();
+       // sql_access = new CommonConnection();
         sqlConn = Control.CommonConnection.getSQLConn();
     }
     // Drop Table

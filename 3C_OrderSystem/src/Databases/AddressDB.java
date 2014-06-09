@@ -23,9 +23,9 @@ public class AddressDB {
         }
     }
     
-    public AddressDB()
+    public static void AddressDB()
     {
-        sql_access = new CommonConnection();
+        //sql_access = new CommonConnection();
         sqlConn = Control.CommonConnection.getSQLConn();
                 
     }
