@@ -32,6 +32,7 @@ public class main_class
                 System.out.println("Testing Connection Data Here:::\n");
                // Connection sqlConn = null;
                 CommonConnection.iniSQL();
+                CommonConnection.iniMYSQL();
                 Databases.AddressDB.AddressDB();
                 Databases.AddressDB.reset();
                 Databases.CustomerDB.CustomerDB();
@@ -39,6 +40,31 @@ public class main_class
                     Databases.CustomerDB.reset();
                 }
                 catch (Databases.CustomerDB.TableException s)
+                {
+                    System.err.println("Error: " + s);
+                }
+                Databases.OrdersDB.OrdersDB();
+                try{
+                    Databases.OrdersDB.reset();
+                }
+                catch (Databases.OrdersDB.TableException s)
+                {
+                    System.err.println("Error: " + s);
+                }
+                Databases.OrderItemsDB.OrderItemsDB();
+                try{
+                    Databases.OrderItemsDB.reset();
+                }
+                catch (Databases.OrderItemsDB.TableException s)
+                {
+                    System.err.println("Error: " + s);
+                }
+                
+                Databases.ProductDB.ProductDB();
+                try{
+                    Databases.ProductDB.reset();
+                }
+                catch (Databases.ProductDB.TableException s)
                 {
                     System.err.println("Error: " + s);
                 }

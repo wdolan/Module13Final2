@@ -21,9 +21,9 @@ public class OrdersDB {
         }
     }
     
-    public OrdersDB()
+    public static void OrdersDB()
     {
-        sql_access = new CommonConnection();
+        //sql_access = new CommonConnection();
         sqlConn = Control.CommonConnection.getSQLConn();
     }
     

@@ -14,7 +14,7 @@ public class OrderItemsDB {
     
     public static final String ITEMS_TABLE_NAME = "C_ITEMS";   
     public static java.sql.Connection sqlConn;
-    CommonConnection sql_access;
+   // CommonConnection sql_access;
     public static class TableException extends Exception{
         TableException(String s){
             super(s);
@@ -52,7 +52,7 @@ public class OrderItemsDB {
             "QUANTITY integer NOT NULL, " +
             "PROD_PRICE decimal(12,2) NOT NULL, " +
             "PRIMARY KEY (ORDER_ITEM_ID), " +
-            "FOREIGN KEY (ORDER_ID) REFERENCES 3C_ORDERS (ORDER_ID)) ";
+            "FOREIGN KEY (ORDER_ID) REFERENCES " + Databases.OrdersDB.ORDERS_TABLE_NAME + " (ORDER_ID)) ";
             stmt = sqlConn.createStatement();
             stmt.executeUpdate(createString);
         } catch (java.sql.SQLException e) {
